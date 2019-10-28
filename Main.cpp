@@ -1,18 +1,20 @@
+#include "header/Window.hpp"
 #include <SFML/Graphics.hpp>
 
 int main( int argc, char** argv )
 {
-	sf::RenderWindow okno(sf::VideoMode(520, 320), "WorkTimer");
+    Window myWindow = Window();
+	sf::RenderWindow window( sf::VideoMode( myWindow.getWidth(), myWindow.getHeight() ), myWindow.getName() );
 
-    while( okno.isOpen() )
+    while( window.isOpen() )
     {
         sf::Event event;
-        while( okno.pollEvent( event ) )
+        while( window.pollEvent( event ) )
         {
             if( event.type == sf::Event::Closed )
-                 okno.close();
+                 window.close();
         } //while
-        okno.display();
+        window.display();
     } //while
 	
     return 0;
