@@ -5,9 +5,11 @@
 
 int main( int argc, char** argv )
 {
+    Logger& logger = Logger::getLogger();
     Window myWindow = Window();
 	sf::RenderWindow window( sf::VideoMode( myWindow.getWidth(), myWindow.getHeight() ), myWindow.getName() );
 
+    logger.write( Utilities::getTimeStr(), Logger::INFO, "Aplikacja została uruchomiona" );
     while( window.isOpen() )
     {
         sf::Event event;
@@ -16,7 +18,7 @@ int main( int argc, char** argv )
             if( event.type == sf::Event::Closed )
             {
                 window.close();
-                Logger::getSingleton() << Utilities::getTimeStr() << "Aplikacja została pomyślnie zamknięta\n";
+                logger.write( Utilities::getTimeStr(), Logger::INFO, "Aplikacja została pomyślnie zamknięta" );
             }
         }
         window.display();
