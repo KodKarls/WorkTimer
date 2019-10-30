@@ -1,3 +1,5 @@
+#include "header/Logger.hpp"
+#include "header/Utilities.hpp"
 #include "header/Window.hpp"
 #include <SFML/Graphics.hpp>
 
@@ -12,10 +14,13 @@ int main( int argc, char** argv )
         while( window.pollEvent( event ) )
         {
             if( event.type == sf::Event::Closed )
-                 window.close();
-        } //while
+            {
+                window.close();
+                Logger::getSingleton() << Utilities::getTimeStr() << "Aplikacja została pomyślnie zamknięta\n";
+            }
+        }
         window.display();
-    } //while
+    }
 	
     return 0;
 }
