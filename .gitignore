@@ -3,11 +3,12 @@
 ###### LIBRARIES
 boost/
 SFML/
-files/
 
 ###### RUBBISH FOLDERS
 audio/
 dokumentacja/
+files/
+bin/
 
 ###### RUBBISH FILES
 FlagaConsola.txt
