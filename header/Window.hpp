@@ -5,11 +5,6 @@
 
 class Window
 {
-private:
-    const int width_;
-    const int height_;
-    const std::string name_;
-
 public:
     Window();
     ~Window();
@@ -17,6 +12,11 @@ public:
     int getWidth() const;
     int getHeight() const;
     std::string getName() const;
+    
+private:
+    const int width_;
+    const int height_;
+    const std::string name_;
 };
 
 #endif
