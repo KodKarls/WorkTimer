@@ -1,7 +1,7 @@
 #include "../header/Window.hpp"
 
 Window::Window()    :   width_( 600 ), height_( 600 ), 
-                        name_( "Work Timer")
+                        name_( "Czasomierz")
 {
 
 }
