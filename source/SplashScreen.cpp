@@ -1,6 +1,6 @@
 #include "../header/SplashScreen.hpp"
 
-SplashScreen::SplashScreen() :  appName_( "" ),
+SplashScreen::SplashScreen() :  appName_( Utilities::appName ),
                                 font_( sf::Font() ), text_( sf::Text() ),
                                 outputText_( "" ), letterCounter_( 0 )
 {
@@ -10,11 +10,6 @@ SplashScreen::SplashScreen() :  appName_( "" ),
 SplashScreen::~SplashScreen()
 {
 
-}
-
-void SplashScreen::setName( std::string name )
-{
-    appName_ = name;
 }
 
 std::string SplashScreen::getAppName()
@@ -49,7 +44,7 @@ void SplashScreen::setTextPosition()
     text_.setPosition( sf::Vector2f( 132, 224 ) );
 }
 
-void SplashScreen::getLetterPosition( int position )
+void SplashScreen::addLetter( int position )
 {
     char letter = appName_.at( position );
     outputText_ += letter;
@@ -69,7 +64,6 @@ int SplashScreen::getLetterCounter()
 void SplashScreen::setFinalTextStyle()
 {
     text_.setStyle( sf::Text::Underlined );
-    //float width = text_.getLocalBounds().width;
 }
 
 void SplashScreen::sleep( int delay )

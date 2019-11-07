@@ -10,7 +10,6 @@ int main( int argc, char** argv )
     logger.write( Utilities::getTimeStr(), Logger::INFO, "Aplikacja została uruchomiona" );
 
     SplashScreen splashScreen = SplashScreen();
-    splashScreen.setName( Utilities::appName );
     splashScreen.setFont();
     splashScreen.setTextStyle();
     splashScreen.setTextPosition();
@@ -29,7 +28,7 @@ int main( int argc, char** argv )
         window.clear();
         if ( splashScreen.getLetterCounter() < splashScreen.getAppName().size() )
         {
-            splashScreen.getLetterPosition( splashScreen.getLetterCounter() );
+            splashScreen.addLetter( splashScreen.getLetterCounter() );
             splashScreen.setOutputText();
             window.draw( splashScreen.getText() );
         }

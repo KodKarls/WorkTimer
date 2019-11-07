@@ -15,13 +15,12 @@ public:
     SplashScreen();
     ~SplashScreen();
 
-    void setName( std::string name );
     std::string getAppName();
     sf::Text getText();
     void setFont();
     void setTextStyle();
     void setTextPosition();
-    void getLetterPosition( int position );
+    void addLetter( int position );
     void setOutputText();
     int getLetterCounter();
     void setFinalTextStyle();
