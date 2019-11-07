@@ -1,18 +1,16 @@
 #include "header/Logger.hpp"
 #include "header/Utilities.hpp"
-#include "header/Window.hpp"
 #include "header/SplashScreen.hpp"
 #include <SFML/Graphics.hpp>
 
 int main( int argc, char** argv )
 {
     Logger& logger = Logger::getLogger();
-    Window myWindow = Window();
-	sf::RenderWindow window( sf::VideoMode( myWindow.getWidth(), myWindow.getHeight() ), myWindow.getName() );
+	sf::RenderWindow window( sf::VideoMode( Utilities::width, Utilities::height ), Utilities::appName );
     logger.write( Utilities::getTimeStr(), Logger::INFO, "Aplikacja została uruchomiona" );
 
     SplashScreen splashScreen = SplashScreen();
-    splashScreen.setName( myWindow.getName() );
+    splashScreen.setName( Utilities::appName );
     splashScreen.setFont();
     splashScreen.setTextStyle();
     splashScreen.setTextPosition();
