@@ -66,7 +66,3 @@ void SplashScreen::setFinalTextStyle()
     text_.setStyle( sf::Text::Underlined );
 }
 
-void SplashScreen::sleep( int delay )
-{
-    std::this_thread::sleep_for( std::chrono::milliseconds( delay ) );
-}

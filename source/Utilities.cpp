@@ -9,4 +9,9 @@ namespace Utilities
         std::strftime( &s[ 0 ], s.size(), "%Y-%m-%d %H:%M:%S", std::localtime( &now ) );
         return s;
     }
+
+    void sleep( int delay )
+    {
+        std::this_thread::sleep_for( std::chrono::milliseconds( delay ) );
+    }
 }

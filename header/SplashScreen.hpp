@@ -5,9 +5,6 @@
 #include "../header/Utilities.hpp"
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Text.hpp>
-#include <string>
-#include <chrono>
-#include <thread>
 
 class SplashScreen
 {
@@ -24,7 +21,6 @@ public:
     void setOutputText();
     int getLetterCounter();
     void setFinalTextStyle();
-    void sleep( int delay );
 
 private:
     std::string appName_;

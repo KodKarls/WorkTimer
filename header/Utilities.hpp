@@ -5,10 +5,12 @@
 #include <string>
 #include <chrono>
 #include <ctime>
+#include <thread>
 
 namespace Utilities
 {
     std::string getTimeStr();
+    void sleep( int delay );
 
     const int width = 600;
     const int height = 600;

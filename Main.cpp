@@ -38,7 +38,7 @@ int main( int argc, char** argv )
             window.draw( splashScreen.getText() );
         }
         window.display();
-        splashScreen.sleep( 300 );
+        Utilities::sleep( 300 );
     }
 	
     return EXIT_SUCCESS;
