@@ -1,6 +1,7 @@
 #ifndef LOGGER_HPP
 #define LOGGER_HPP
 
+#include "Utilities.hpp"
 #include <iostream>
 #include <fstream>
 
@@ -13,7 +14,7 @@ public:
         ERROR
     };
 
-    void write( const std::string& date, Priority priority, const std::string& message );
+    void write( Priority priority, const std::string& message, const std::string& date = Utilities::getTimeStr() );
 
     static Logger& getLogger()
     {

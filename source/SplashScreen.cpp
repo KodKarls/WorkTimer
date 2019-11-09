@@ -27,7 +27,7 @@ void SplashScreen::setFont()
     if( !font_.loadFromFile( "resource/fonts/YeonSung/YeonSung-Regular.ttf" ) )
     {
         std::cout << "Nie udalo sie wczytac czcionki...";
-        Logger::getLogger().write( Utilities::getTimeStr(), Logger::ERROR, "Czcionka nie została ustawiona" );
+        Logger::getLogger().write( Logger::ERROR, "Czcionka nie została ustawiona" );
     }
 }
 

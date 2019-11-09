@@ -2,7 +2,6 @@
 #define SPLASH_SCREEN_HPP
 
 #include "../header/Logger.hpp"
-#include "../header/Utilities.hpp"
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Text.hpp>
 

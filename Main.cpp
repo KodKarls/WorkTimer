@@ -1,5 +1,4 @@
 #include "header/Logger.hpp"
-#include "header/Utilities.hpp"
 #include "header/SplashScreen.hpp"
 #include <SFML/Graphics.hpp>
 
@@ -7,7 +6,7 @@ int main( int argc, char** argv )
 {
     Logger& logger = Logger::getLogger();
 	sf::RenderWindow window( sf::VideoMode( Utilities::width, Utilities::height ), Utilities::appName );
-    logger.write( Utilities::getTimeStr(), Logger::INFO, "Aplikacja została uruchomiona" );
+    logger.write( Logger::INFO, "Aplikacja została uruchomiona" );
 
     SplashScreen splashScreen = SplashScreen();
     splashScreen.setFont();
@@ -22,7 +21,7 @@ int main( int argc, char** argv )
             if( event.type == sf::Event::Closed )
             {
                 window.close();
-                logger.write( Utilities::getTimeStr(), Logger::INFO, "Aplikacja została pomyślnie zamknięta" );
+                logger.write( Logger::INFO, "Aplikacja została pomyślnie zamknięta" );
             }
         }
         window.clear();

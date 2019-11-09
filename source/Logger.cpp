@@ -6,7 +6,7 @@ const std::string Logger::PriorityNames_[] =
     "ERROR"
 };
 
-void Logger::write( const std::string& date, Priority priority, const std::string& message )
+void Logger::write( Priority priority, const std::string& message, const std::string& date )
 {
     file_       << date
                 << "\n"
