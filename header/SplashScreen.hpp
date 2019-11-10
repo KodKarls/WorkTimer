@@ -21,7 +21,7 @@ public:
     void setFinalTextStyle();
 
 private:
-    void setFontSize( int fontSize = 76 );
+    void setFontSize( int fontSize = 102 );
     int getFontSize();
     void setTextPosition();
 
