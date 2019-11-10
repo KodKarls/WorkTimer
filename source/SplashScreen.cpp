@@ -24,7 +24,7 @@ sf::Text SplashScreen::getText()
 
 void SplashScreen::setFont()
 {
-    if( !font_.loadFromFile( "resource/fonts/YeonSung/YeonSung-Regular.ttf" ) )
+    if( !font_.loadFromFile( "resource/fonts/Akronim-Regular.ttf" ) )
     {
         std::cout << "Nie udalo sie wczytac czcionki...";
         Logger::getLogger().write( Logger::ERROR, "Czcionka nie została ustawiona" );
@@ -41,7 +41,7 @@ void SplashScreen::setTextStyle()
 
 void SplashScreen::setTextPosition()
 {
-    text_.setPosition( sf::Vector2f( 132, 224 ) );
+    text_.setPosition( sf::Vector2f( 142.5, 224 ) );
 }
 
 void SplashScreen::addLetter( int position )
@@ -64,5 +64,7 @@ int SplashScreen::getLetterCounter()
 void SplashScreen::setFinalTextStyle()
 {
     text_.setStyle( sf::Text::Underlined );
+    //float textWidth = text_.getGlobalBounds().width;
+    //std::cout << textWidth << "\n";
 }
 
