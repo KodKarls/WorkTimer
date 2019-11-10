@@ -1,0 +1,5 @@
+Flaga do wyświetlania aplikacji bez konsoli windows:
+-mwindows
+
+Test splash screnna wyniki:
+./bin/test/splashScreenTest.exe --log_level=test_suite > files/test/splashScreenTestResult.txt
