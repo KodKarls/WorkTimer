@@ -15,16 +15,20 @@ public:
     sf::Text getText();
     void setFont();
     void setTextStyle();
-    void setTextPosition();
     void addLetter( int position );
     void setOutputText();
     int getLetterCounter();
     void setFinalTextStyle();
 
 private:
+    void setFontSize( int fontSize = 76 );
+    int getFontSize();
+    void setTextPosition();
+
     std::string appName_;
     sf::Font font_;
     sf::Text text_;
+    int fontSize_;
     std::string outputText_;
     int letterCounter_;
 };

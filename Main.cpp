@@ -11,7 +11,6 @@ int main( int argc, char** argv )
     SplashScreen splashScreen = SplashScreen();
     splashScreen.setFont();
     splashScreen.setTextStyle();
-    splashScreen.setTextPosition();
 
     while( window.isOpen() )
     {
