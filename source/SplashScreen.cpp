@@ -1,25 +1,18 @@
 #include "../header/SplashScreen.hpp"
 
 SplashScreen::SplashScreen() :  appName_( Utilities::appName ),
-                                font_( sf::Font() ), text_( sf::Text() ), fontSize_( 0 ),
-                                outputText_( "" ), letterCounter_( 0 )
+                                font_( sf::Font() ), fontSize_( 0 ), 
+                                text_( sf::Text() ), outputText_( "" ), letterCounter_( 0 ),
+                                screenShow_( true ), running_( true ), event_( sf::Event() )
 {
+    setFont();
     setFontSize();
+    setText();
 }
 
 SplashScreen::~SplashScreen()
 {
 
-}
-
-std::string SplashScreen::getAppName()
-{
-    return appName_;
-}
-
-sf::Text SplashScreen::getText()
-{
-    return text_;
 }
 
 void SplashScreen::setFont()
@@ -41,7 +34,7 @@ int SplashScreen::getFontSize()
     return fontSize_;
 }
 
-void SplashScreen::setTextStyle()
+void SplashScreen::setText()
 {
     text_.setFont( font_ );
     text_.setCharacterSize( getFontSize() );
@@ -56,28 +49,57 @@ void SplashScreen::setTextPosition()
     text_.setPosition( sf::Vector2f( positionX, positionY ) );
 }
 
-void SplashScreen::addLetter( int position )
+void SplashScreen::doAnimation()
 {
-    char letter = appName_.at( position );
-    outputText_ += letter;
-    letterCounter_++;
-}
-
-void SplashScreen::setOutputText()
-{
-    text_.setString( outputText_ );
+    if( letterCounter_ < appName_.size() )
+    {
+        char letter = appName_.at( letterCounter_ );
+        outputText_ += letter;
+        letterCounter_++;
+        text_.setString( outputText_ );
+    }
+    else
+    {
+        text_.setStyle( sf::Text::Underlined );
+        screenShow_ = !screenShow_;
+    }
     setTextPosition();
 }
 
-int SplashScreen::getLetterCounter()
+bool SplashScreen::checkIsShow()
 {
-    return letterCounter_;
+    return screenShow_;
 }
 
-void SplashScreen::setFinalTextStyle()
+int SplashScreen::run( sf::RenderWindow &app )
 {
-    text_.setStyle( sf::Text::Underlined );
-    //float textWidth = text_.getGlobalBounds().width;
-    //std::cout << textWidth << "\n";
+    while( running_)
+    {
+        while( app.pollEvent( event_ ) )
+        {
+            // Zamknięcie okna
+            if( event_.type == sf::Event::Closed )
+            {
+                return -1;
+            }
+        }
+        app.clear();
+        if ( checkIsShow() )
+        {   
+            doAnimation();
+            app.draw( text_ );
+            Utilities::sleep( 300 );
+        }
+        else
+        {
+            doAnimation();
+            app.draw( text_ );
+            Utilities::sleep( 3000 );
+            app.close();
+            return 1;
+        }
+        app.display();
+    }
+    // Nigdy nie osiągniemy tego punkty ale zapobiegawczo
+    return -1;
 }
-

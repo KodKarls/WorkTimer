@@ -2,35 +2,37 @@
 #define SPLASH_SCREEN_HPP
 
 #include "../header/Logger.hpp"
-#include <SFML/Graphics/Font.hpp>
-#include <SFML/Graphics/Text.hpp>
+#include "EachScreen.hpp"
+#include <SFML/Graphics.hpp>
 
-class SplashScreen
+class SplashScreen : public EachScreen
 {
 public:
     SplashScreen();
-    ~SplashScreen();
+    virtual ~SplashScreen();
 
-    std::string getAppName();
-    sf::Text getText();
-    void setFont();
-    void setTextStyle();
-    void addLetter( int position );
-    void setOutputText();
-    int getLetterCounter();
-    void setFinalTextStyle();
+    void doAnimation();
+    bool checkIsShow();
+
+    virtual int run( sf::RenderWindow &app ) override;
 
 private:
-    void setFontSize( int fontSize = 102 );
     int getFontSize();
+    void setFont();
+    void setFontSize( int fontSize = 102 );
+    void setText();
     void setTextPosition();
 
     std::string appName_;
     sf::Font font_;
-    sf::Text text_;
     int fontSize_;
+    sf::Text text_;
     std::string outputText_;
     int letterCounter_;
+    bool screenShow_;
+
+    sf::Event event_;
+    bool running_;
 };
 
 #endif
