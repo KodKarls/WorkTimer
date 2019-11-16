@@ -1,8 +1,9 @@
 #include "header/Logger.hpp"
-//#include "header/SplashScreen.hpp"
 #include "header/screens.hpp"
-#include <iostream>
+#include "header/SplashScreen.hpp"
+#include "header/Button.hpp"
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 int main( int argc, char** argv )
 {

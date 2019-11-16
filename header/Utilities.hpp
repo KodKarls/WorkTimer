@@ -16,7 +16,11 @@ namespace Utilities
 
     const int width = 600;
     const int height = 600;
+
     const std::string appName = "Czasomierz";
+    const std::string topButton = "Odliczaj czas";
+    const std::string middleButton = "Informacje";
+    const std::string bottomButton = "Wyjście";
 }
 
 #endif
