@@ -21,6 +21,6 @@ namespace Utilities
         std::basic_string< sf::Uint32 > temp;
         sf::Utf8::toUtf32( text.begin(), text.end(), std::back_inserter( temp ) );
         result = temp;
-        return result; 
+        return result;
     }
 }

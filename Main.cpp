@@ -25,6 +25,6 @@ int main( int argc, char** argv )
     {
         screen = screens[ screen ]->run( window );
     }
-    
+
     return EXIT_SUCCESS;
 }

@@ -1,12 +1,37 @@
-all:
-	g++ Main.cpp header\Logger.hpp header\Utilities.hpp header\SplashScreen.hpp header\Button.hpp header\EachScreen.hpp header\screens.hpp source\Logger.cpp source\Utilities.cpp source\SplashScreen.cpp source\Button.cpp -o WorkTimer.exe \
-	-DSFML_STATIC -I SFML\include -L SFML\lib -lsfml-graphics-s -lsfml-window-s -lsfml-audio-s -lsfml-system-s -lopengl32 -lwinmm -lgdi32 -lfreetype -lopenal32 -lflac -lvorbisenc -lvorbisfile -lvorbis -logg \
-	-mwindows
+# Zadanie:
+# 1) Pliki .o powinny zapisywać się w innym miejscu
+# 2) Ustawić ściężkę do pliku wynikowego
+# 3) Stworzyć odzielne warianty dla budowy debug i release
+# 4) Dołączyć potrzebne biblioteki .dll
 
-console-on:
-	g++ Main.cpp header\Logger.hpp header\Utilities.hpp header\SplashScreen.hpp header\Button.hpp header\EachScreen.hpp header\screens.hpp source\Logger.cpp source\Utilities.cpp source\SplashScreen.cpp source\Button.cpp -o WorkTimer.exe \
-	-DSFML_STATIC -I SFML\include -L SFML\lib -lsfml-graphics-s -lsfml-window-s -lsfml-audio-s -lsfml-system-s -lopengl32 -lwinmm -lgdi32 -lfreetype -lopenal32 -lflac -lvorbisenc -lvorbisfile -lvorbis -logg
+LIBDIR=lib
 
-splashScreen-test:
-	g++ -I boost\include\boost-1_71 header\Logger.hpp header\Utilities.hpp source\Logger.cpp source\Utilities.cpp -o bin\test\splashScreenTest test\splashScreenTest.cpp -L boost\lib -Wl,-Bdynamic -lboost_unit_test_framework-mgw73-mt-x64-1_71 \
-	-DSFML_STATIC -I SFML\include -L SFML\lib -lsfml-graphics-s -lsfml-window-s -lsfml-audio-s -lsfml-system-s -lopengl32 -lwinmm -lgdi32 -lfreetype -lopenal32 -lflac -lvorbisenc -lvorbisfile -lvorbis -logg
+OBJS = Main.o Logger.o SplashScreen.o Utilities.o
+CXX = g++
+CXXFLAGS = -Wall -std=c++11
+
+LDFLAGS = -L$(LIBDIR)/SFML/lib
+CPPFLAGS = -I$(LIBDIR)/SFML/include"
+
+LDDEBUGLIBS = -lsfml-graphics-d -lsfml-window-d -lsfml-audio-d -lsfml-system-d -mwindows
+LDRELEASELIBS = -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-system -mwindows
+
+debug: $(OBJS)
+		$(CXX) -g -o WorkTimer $(OBJS) $(LDDEBUGLIBS) $(LDFLAGS)
+
+Main.o: Main.cpp header/Logger.hpp header/screens.hpp header/EachScreen.hpp
+		$(CXX) -g -c Main.cpp $(CPPFLAGS)
+
+Logger.o: header/Logger.hpp header/Utilities.hpp source/Logger.cpp
+			$(CXX) -g -c source/Logger.cpp $(CPPFLAGS)
+
+SplashScreen.o: header/SplashScreen.hpp header/Logger.hpp source/SplashScreen.cpp
+			$(CXX) -g -c source/SplashScreen.cpp $(CPPFLAGS)
+
+Utilities.o: header/Utilities.hpp source/Utilities.cpp
+			$(CXX) -g -c source/Utilities.cpp $(CPPFLAGS)
+
+# clean:
+# 	$(RM) game $(OBJS)
+
+# build-windows-release: game
