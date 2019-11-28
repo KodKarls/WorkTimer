@@ -17,15 +17,34 @@ Button::Button( sf::RenderWindow& window, std::string name )      :     width_( 
     buttonCounter++;
 }
 
+Button::Button( std::string name )                              :       width_( 350 ), height_( 100 ),
+                                                                        rectangle_( sf::RectangleShape() ),
+                                                                        font_( sf::Font() ), text_( sf::Text() ),
+                                                                        name_( name ),
+                                                                        positionX_( 0 ), positionY_( 0 )
+{
+    rectangle_.setSize( sf::Vector2f( width_, height_ ) );
+    setButtonColor();
+    setButtonPosition();
+    setFont();
+    setText();
+    setTextPosition();
+    buttonCounter++;
+}
+
 Button::~Button()
 {
 
 }
 
-void Button::draw( sf::RenderWindow& window )
+sf::RectangleShape& Button::getShape()
 {
-    window.draw( rectangle_ );
-    window.draw( text_ );
+    return rectangle_;
+}
+
+sf::Text& Button::getText()
+{
+    return text_;
 }
 
 void Button::setButtonColor()

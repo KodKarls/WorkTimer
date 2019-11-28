@@ -1,7 +1,5 @@
 #include "header/Logger.hpp"
 #include "header/screens.hpp"
-#include "header/SplashScreen.hpp"
-#include "header/Button.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
@@ -18,7 +16,9 @@ int main( int argc, char** argv )
 
     // Przygotowanie ekranów
     SplashScreen splashScreen = SplashScreen();
+    Menu menu = Menu();
     screens.push_back( &splashScreen );
+    screens.push_back( &menu );
 
     // Główna pętla
     while( screen >= 0 )

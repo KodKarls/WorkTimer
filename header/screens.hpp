@@ -6,5 +6,6 @@
 
 // Wszystkie ekrany w aplikacji
 #include "SplashScreen.hpp"
+#include "Menu.hpp"
 
 #endif

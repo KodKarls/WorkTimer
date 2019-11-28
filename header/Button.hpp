@@ -24,9 +24,11 @@ public:
     };
 
     Button( sf::RenderWindow& window, std::string name );
+    Button( std::string name );
     ~Button();
 
-    void draw( sf::RenderWindow& window );
+    sf::RectangleShape& getShape();
+    sf::Text& getText();
 
 private:
     void setButtonColor();

@@ -1,7 +1,7 @@
 #include "../header/SplashScreen.hpp"
 
 SplashScreen::SplashScreen() :  appName_( Utilities::appName ),
-                                font_( sf::Font() ), fontSize_( 0 ), 
+                                font_( sf::Font() ), fontSize_( 0 ),
                                 text_( sf::Text() ), outputText_( "" ), letterCounter_( 0 ),
                                 screenShow_( true ), running_( true ), event_( sf::Event() )
 {
@@ -85,7 +85,7 @@ int SplashScreen::run( sf::RenderWindow &app )
         }
         app.clear();
         if ( checkIsShow() )
-        {   
+        {
             doAnimation();
             app.draw( text_ );
             Utilities::sleep( 300 );
@@ -95,7 +95,8 @@ int SplashScreen::run( sf::RenderWindow &app )
             doAnimation();
             app.draw( text_ );
             Utilities::sleep( 3000 );
-            app.close();
+            //app.close();
+            app.clear();
             return 1;
         }
         app.display();
