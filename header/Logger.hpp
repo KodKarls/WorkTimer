@@ -14,7 +14,8 @@ public:
         ERROR
     };
 
-    void write( Priority priority, const std::string& message, const std::string& date = Utilities::getTimeStr() );
+    void write( Priority priority, const std::string& message,
+                const std::string& date = Utilities::getTimeStr() );
 
     static Logger& getLogger()
     {

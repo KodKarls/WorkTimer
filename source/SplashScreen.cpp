@@ -73,11 +73,10 @@ bool SplashScreen::checkIsShow()
 
 int SplashScreen::run( sf::RenderWindow &app )
 {
-    while( running_)
+    while( running_ )
     {
         while( app.pollEvent( event_ ) )
         {
-            // Zamknięcie okna
             if( event_.type == sf::Event::Closed )
             {
                 app.close();
@@ -96,12 +95,10 @@ int SplashScreen::run( sf::RenderWindow &app )
             doAnimation();
             app.draw( text_ );
             Utilities::sleep( 3000 );
-            //app.close();
             app.clear();
             return 1;
         }
         app.display();
     }
-    // Nigdy nie osiągniemy tego punkty ale zapobiegawczo
     return -1;
 }

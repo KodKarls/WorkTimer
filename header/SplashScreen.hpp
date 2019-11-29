@@ -1,7 +1,7 @@
 #ifndef SPLASH_SCREEN_HPP
 #define SPLASH_SCREEN_HPP
 
-#include "../header/Logger.hpp"
+#include "Logger.hpp"
 #include "EachScreen.hpp"
 #include <SFML/Graphics.hpp>
 
