@@ -14,15 +14,34 @@ int Menu::run( sf::RenderWindow &app )
 {
     Button topButton = Button( Utilities::topButton );
 	Button middleButton = Button( Utilities::middleButton );
-	Button bottomButton = Button( Utilities::bottomButton );
+	Button exitButton = Button( Utilities::exitButton );
 
     while( running_ )
     {
         while( app.pollEvent( event_ ) )
         {
-            if( event_.type == sf::Event::Closed )
+            switch( event_.type )
             {
-                return -1;
+                case sf::Event::Closed:
+                {
+                    app.close();
+                    return -1;
+                    break;
+                }
+                case sf::Event::MouseButtonPressed:
+                {
+                    sf::Vector2i mousePosition = sf::Mouse::getPosition( app );
+                    sf::Vector2f mousePositionCoordinates( mousePosition.x, mousePosition.y );
+                    if( exitButton.getShape().getGlobalBounds().contains( mousePositionCoordinates ) )
+                    {
+                        app.close();
+                        return -1;
+                    }
+                    break;
+                }
+                default:
+                    Logger::getLogger().write( Logger::INFO, "Nie ma takiego zdarzenia!" );
+                    break;
             }
         }
         app.clear();
@@ -30,8 +49,8 @@ int Menu::run( sf::RenderWindow &app )
         app.draw( topButton.getText() );
         app.draw( middleButton.getShape() );
         app.draw( middleButton.getText() );
-        app.draw( bottomButton.getShape() );
-        app.draw( bottomButton.getText() );
+        app.draw( exitButton.getShape() );
+        app.draw( exitButton.getText() );
         app.display();
     }
     return -1;

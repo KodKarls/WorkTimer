@@ -80,6 +80,7 @@ int SplashScreen::run( sf::RenderWindow &app )
             // Zamknięcie okna
             if( event_.type == sf::Event::Closed )
             {
+                app.close();
                 return -1;
             }
         }
