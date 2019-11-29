@@ -6,7 +6,7 @@
 
 LIBDIR=lib
 
-OBJS = Main.o Logger.o SplashScreen.o Utilities.o Button.o Menu.o
+OBJS = Main.o Logger.o SplashScreen.o Utilities.o Button.o Menu.o InfoScreen.o
 CXX = g++
 CXXFLAGS = -Wall -std=c++11
 
@@ -36,6 +36,9 @@ Button.o: header/Button.hpp header/Logger.hpp source/Button.cpp
 
 Menu.o: header/Menu.hpp header/Button.hpp header/Logger.hpp source/Menu.cpp source/Button.cpp
 			$(CXX) -g -c source/Menu.cpp $(CPPFLAGS)
+
+InfoScreen.o: header/InfoScreen.hpp header/Logger.hpp header/Button.hpp source/InfoScreen.cpp source/Button.cpp
+			$(CXX) -g -c source/InfoScreen.cpp $(CPPFLAGS)
 
 # clean:
 # 	$(RM) game $(OBJS)

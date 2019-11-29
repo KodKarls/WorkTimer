@@ -25,10 +25,13 @@ public:
 
     Button( sf::RenderWindow& window, std::string name );
     Button( std::string name );
+    Button( std::string name, int width, int height );
     ~Button();
 
     sf::RectangleShape& getShape();
     sf::Text& getText();
+
+    static void setButtonCounter( int counter );
 
 private:
     void setButtonColor();

@@ -14,8 +14,10 @@ int main( int argc, char** argv )
 
     SplashScreen splashScreen = SplashScreen();
     Menu menu = Menu();
+    InfoScreen infoScreen = InfoScreen();
     screens.push_back( &splashScreen );
     screens.push_back( &menu );
+    screens.push_back( &infoScreen );
 
     while( screen >= 0 )
     {

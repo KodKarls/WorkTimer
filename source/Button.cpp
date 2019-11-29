@@ -2,6 +2,11 @@
 
 int Button::buttonCounter = 0;
 
+void Button::setButtonCounter( int counter )
+{
+    buttonCounter = counter;
+}
+
 Button::Button( sf::RenderWindow& window, std::string name )      :     width_( 350 ), height_( 100 ),
                                                                         rectangle_( sf::RectangleShape() ),
                                                                         font_( sf::Font() ), text_( sf::Text() ),
@@ -18,6 +23,21 @@ Button::Button( sf::RenderWindow& window, std::string name )      :     width_( 
 }
 
 Button::Button( std::string name )                              :       width_( 350 ), height_( 100 ),
+                                                                        rectangle_( sf::RectangleShape() ),
+                                                                        font_( sf::Font() ), text_( sf::Text() ),
+                                                                        name_( name ),
+                                                                        positionX_( 0 ), positionY_( 0 )
+{
+    rectangle_.setSize( sf::Vector2f( width_, height_ ) );
+    setButtonColor();
+    setButtonPosition();
+    setFont();
+    setText();
+    setTextPosition();
+    buttonCounter++;
+}
+
+Button::Button( std::string name, int width, int height )       :       width_( width ), height_( height ),
                                                                         rectangle_( sf::RectangleShape() ),
                                                                         font_( sf::Font() ), text_( sf::Text() ),
                                                                         name_( name ),
@@ -70,6 +90,11 @@ void Button::setButtonPosition()
 
         case 2:
             positionY_ += height_ * 4;
+            rectangle_.setPosition( sf::Vector2f( positionX_, positionY_ ) );
+            break;
+
+        case 3:
+            positionY_ += height_ * 2 + 70;
             rectangle_.setPosition( sf::Vector2f( positionX_, positionY_ ) );
             break;
 

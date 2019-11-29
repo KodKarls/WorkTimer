@@ -13,7 +13,7 @@ Menu::~Menu()
 int Menu::run( sf::RenderWindow &app )
 {
     Button topButton = Button( Utilities::topButton );
-	Button middleButton = Button( Utilities::middleButton );
+	Button infoButton = Button( Utilities::infoButton );
 	Button exitButton = Button( Utilities::exitButton );
 
     while( running_ )
@@ -37,18 +37,24 @@ int Menu::run( sf::RenderWindow &app )
                         app.close();
                         return -1;
                     }
+                    else if( infoButton.getShape().getGlobalBounds().contains( mousePositionCoordinates ) )
+                    {
+                        return 2;
+                    }
                     break;
                 }
                 default:
+                {
                     Logger::getLogger().write( Logger::INFO, "Nie ma takiego zdarzenia!" );
                     break;
+                }
             }
         }
         app.clear();
         app.draw( topButton.getShape() );
         app.draw( topButton.getText() );
-        app.draw( middleButton.getShape() );
-        app.draw( middleButton.getText() );
+        app.draw( infoButton.getShape() );
+        app.draw( infoButton.getText() );
         app.draw( exitButton.getShape() );
         app.draw( exitButton.getText() );
         app.display();
