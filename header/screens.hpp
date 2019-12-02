@@ -6,5 +6,6 @@
 #include "SplashScreen.hpp"
 #include "Menu.hpp"
 #include "InfoScreen.hpp"
+#include "ClockScreen.hpp"
 
 #endif

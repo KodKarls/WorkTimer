@@ -12,7 +12,7 @@ Menu::~Menu()
 
 int Menu::run( sf::RenderWindow &app )
 {
-    Button topButton = Button( Utilities::topButton );
+    Button countdownButton = Button( Utilities::countdownButton );
 	Button infoButton = Button( Utilities::infoButton );
 	Button exitButton = Button( Utilities::exitButton );
 
@@ -41,6 +41,10 @@ int Menu::run( sf::RenderWindow &app )
                     {
                         return 2;
                     }
+                    else if( countdownButton.getShape().getGlobalBounds().contains( mousePositionCoordinates ) )
+                    {
+                        return 3;
+                    }
                     break;
                 }
                 default:
@@ -51,8 +55,8 @@ int Menu::run( sf::RenderWindow &app )
             }
         }
         app.clear();
-        app.draw( topButton.getShape() );
-        app.draw( topButton.getText() );
+        app.draw( countdownButton.getShape() );
+        app.draw( countdownButton.getText() );
         app.draw( infoButton.getShape() );
         app.draw( infoButton.getText() );
         app.draw( exitButton.getShape() );

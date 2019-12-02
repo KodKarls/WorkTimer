@@ -49,7 +49,6 @@ Button::Button( std::string name, int width, int height )       :       width_( 
     setFont();
     setText();
     setTextPosition();
-    buttonCounter++;
 }
 
 Button::~Button()
