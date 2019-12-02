@@ -83,6 +83,7 @@ int InfoScreen::run( sf::RenderWindow &app )
                         backButton.setButtonCounter( 0 );
                         return 1;
                     }
+                    break;
                 }
                 default:
                 {
