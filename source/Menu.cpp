@@ -34,8 +34,7 @@ int Menu::run( sf::RenderWindow &app )
                     sf::Vector2f mousePositionCoordinates( mousePosition.x, mousePosition.y );
                     if( exitButton.getShape().getGlobalBounds().contains( mousePositionCoordinates ) )
                     {
-                        app.close();
-                        return -1;
+                        return 4;
                     }
                     else if( infoButton.getShape().getGlobalBounds().contains( mousePositionCoordinates ) )
                     {

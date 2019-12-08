@@ -22,6 +22,7 @@ namespace Utilities
     const std::string infoButton = "Informacje";
     const std::string exitButton = "Wyjście";
     const std::string backButton = "Powrót";
+    const std::string endText = "Do zobaczenia :)";
 
     const std::string infoText = "Czasomierz to prosty program\ndo odliczania czasu.";
     const std::string authorsText = "Wykonali: Paula & Carolinii";

@@ -16,10 +16,12 @@ int main( int argc, char** argv )
     Menu menu = Menu();
     InfoScreen infoScreen = InfoScreen();
     ClockScreen clockScreen = ClockScreen();
+    EndScreen endScreen = EndScreen();
     screens.push_back( &splashScreen );
     screens.push_back( &menu );
     screens.push_back( &infoScreen );
     screens.push_back( &clockScreen );
+    screens.push_back( &endScreen );
 
     while( screen >= 0 )
     {
