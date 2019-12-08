@@ -12,7 +12,7 @@ bin/
 ###### RUBBISH FILES
 FlagaConsola.txt
 WorkTimer.exe
-openal32.dll
+*.dll
 *.o
 
 ###### VISUAL STUDIO CODE
