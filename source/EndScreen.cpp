@@ -76,6 +76,7 @@ int EndScreen::run( sf::RenderWindow &app )
         app.display();
 		Utilities::sleep(2500);
 		app.close();
+        return -1;
     }
     return -1;
 }
