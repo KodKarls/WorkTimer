@@ -1,52 +1,45 @@
-# Zadanie:
-# 1) Pliki .o powinny zapisywać się w innym miejscu
-# 2) Ustawić ściężkę do pliku wynikowego
-# 3) Stworzyć odzielne warianty dla budowy debug i release
-# 4) Dołączyć potrzebne biblioteki .dll
-
-LIBDIR=lib
-
-OBJS = Main.o Logger.o SplashScreen.o Utilities.o Button.o Menu.o InfoScreen.o ClockScreen.o EndScreen.o
 CXX = g++
 CXXFLAGS = -Wall -std=c++11
+OBJS = Main.o Logger.o SplashScreen.o Utilities.o Button.o Menu.o InfoScreen.o ClockScreen.o EndScreen.o
+LIBDIR=lib
 
 LDFLAGS = -L$(LIBDIR)/SFML/lib
-CPPFLAGS = -I$(LIBDIR)/SFML/include"
+CPPFLAGS = -I$(LIBDIR)/SFML/include
 
 LDDEBUGLIBS = -lsfml-graphics-d -lsfml-window-d -lsfml-audio-d -lsfml-system-d -mwindows
 LDRELEASELIBS = -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-system -mwindows
 
 debug: $(OBJS)
-		$(CXX) -g -o WorkTimer $(OBJS) $(LDDEBUGLIBS) $(LDFLAGS)
+	$(CXX) -g $^ $(LDFLAGS) $(LDDEBUGLIBS) -o WorkTimer
 
 Main.o: Main.cpp header/Logger.hpp header/screens.hpp header/EachScreen.hpp
-		$(CXX) -g -c Main.cpp $(CPPFLAGS)
+	$(CXX) -g -c $(CPPFLAGS) $< -o $@
 
-Logger.o: header/Logger.hpp header/Utilities.hpp source/Logger.cpp
-			$(CXX) -g -c source/Logger.cpp $(CPPFLAGS)
+Logger.o: source/Logger.cpp header/Logger.hpp header/Utilities.hpp
+	$(CXX) -g -c $(CPPFLAGS) $< -o $@
 
-SplashScreen.o: header/SplashScreen.hpp header/Logger.hpp source/SplashScreen.cpp
-			$(CXX) -g -c source/SplashScreen.cpp $(CPPFLAGS)
+SplashScreen.o: source/SplashScreen.cpp header/SplashScreen.hpp header/Logger.hpp header/EachScreen.hpp
+	$(CXX) -g -c $(CPPFLAGS) $< -o $@
 
-Utilities.o: header/Utilities.hpp source/Utilities.cpp
-			$(CXX) -g -c source/Utilities.cpp $(CPPFLAGS)
+Utilities.o: source/Utilities.cpp header/Utilities.hpp
+	$(CXX) -g -c $(CPPFLAGS) $< -o $@
 
-Button.o: header/Button.hpp header/Logger.hpp source/Button.cpp
-			$(CXX) -g -c source/Button.cpp $(CPPFLAGS)
+Button.o: source/Button.cpp header/Button.hpp header/Logger.hpp
+	$(CXX) -g -c $(CPPFLAGS) $< -o $@
 
-Menu.o: header/Menu.hpp header/Button.hpp header/Logger.hpp source/Menu.cpp source/Button.cpp
-			$(CXX) -g -c source/Menu.cpp $(CPPFLAGS)
+Menu.o: source/Menu.cpp header/Menu.hpp header/Button.hpp header/EachScreen.hpp
+	$(CXX) -g -c $(CPPFLAGS) $< -o $@
 
-InfoScreen.o: header/InfoScreen.hpp header/Logger.hpp header/Button.hpp source/InfoScreen.cpp source/Button.cpp
-			$(CXX) -g -c source/InfoScreen.cpp $(CPPFLAGS)
+InfoScreen.o: source/InfoScreen.cpp header/InfoScreen.hpp header/Button.hpp header/EachScreen.hpp
+	$(CXX) -g -c $(CPPFLAGS) $< -o $@
 
-ClockScreen.o: header/ClockScreen.hpp header/Logger.hpp header/Button.hpp source/ClockScreen.cpp source/Button.cpp
-			$(CXX) -g -c source/ClockScreen.cpp $(CPPFLAGS)
+ClockScreen.o: source/ClockScreen.cpp header/ClockScreen.hpp header/Button.hpp header/EachScreen.hpp
+	$(CXX) -g -c $(CPPFLAGS) $< -o $@
 
-EndScreen.o: header/EndScreen.hpp header/Logger.hpp header/Button.hpp source/EndScreen.cpp source/Button.cpp
-			$(CXX) -g -c source/EndScreen.cpp $(CPPFLAGS)
+EndScreen.o: source/EndScreen.cpp header/EndScreen.hpp header/Button.hpp header/EachScreen.hpp
+	$(CXX) -g -c $(CPPFLAGS) $< -o $@
 
-# clean:
-# 	$(RM) game $(OBJS)
+clean:
+	rm -f $(OBJS) WorkTimer
 
-# build-windows-release: game
+.PHONY: all clean

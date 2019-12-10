@@ -1,7 +1,6 @@
 #ifndef MENU_HPP
 #define MENU_HPP
 
-#include "Logger.hpp"
 #include "EachScreen.hpp"
 #include "Button.hpp"
 
