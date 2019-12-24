@@ -1,7 +1,7 @@
 #ifndef INFO_SCREEN_HPP
 #define INFO_SCREEN_HPP
 
-#include "Button.hpp"
+#include "InfoButton.hpp"
 #include "EachScreen.hpp"
 #include <SFML/Graphics.hpp>
 

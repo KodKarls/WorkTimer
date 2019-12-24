@@ -1,7 +1,7 @@
 #ifndef CLOCK_SCREEN_HPP
 #define CLOCK_SCREEN_HPP
 
-#include "Button.hpp"
+#include "ClockButton.hpp"
 #include "EachScreen.hpp"
 #include <SFML/Graphics.hpp>
 

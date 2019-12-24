@@ -2,7 +2,7 @@
 #define MENU_HPP
 
 #include "EachScreen.hpp"
-#include "Button.hpp"
+#include "MenuButton.hpp"
 
 class Menu : public EachScreen
 {

@@ -12,9 +12,9 @@ Menu::~Menu()
 
 int Menu::run( sf::RenderWindow &app )
 {
-    Button countdownButton = Button( Utilities::countdownButton );
-	Button infoButton = Button( Utilities::infoButton );
-	Button exitButton = Button( Utilities::exitButton );
+    MenuButton countdownButton = MenuButton( Utilities::countdownButton );
+    MenuButton infoButton = MenuButton( Utilities::infoButton );
+    MenuButton exitButton = MenuButton( Utilities::exitButton );
 
     while( running_ )
     {

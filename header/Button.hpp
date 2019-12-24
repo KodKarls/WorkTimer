@@ -23,26 +23,21 @@ public:
         }
     };
 
-    Button( sf::RenderWindow& window, std::string name );
-    Button( std::string name );
-    Button( std::string name, int width, int height );
-    ~Button();
+    Button();
+    virtual ~Button();
 
     sf::RectangleShape& getShape();
     sf::Text& getText();
 
-    static void setButtonCounter( int counter );
+protected:
+    virtual void setButtonPosition() = 0;
+    virtual void setTextPosition() = 0;
 
-private:
     void setButtonColor();
-    void setButtonPosition();
     float getPositionX();
     float getPositionY();
     void setFont();
     void setText();
-    void setTextPosition();
-
-    static int buttonCounter;
 
     int width_;
     int height_;

@@ -60,7 +60,7 @@ int InfoScreen::getFontSize()
 
 int InfoScreen::run( sf::RenderWindow &app )
 {
-    Button backButton = Button( Utilities::backButton, 250, 100 );
+    InfoButton backButton = InfoButton( Utilities::backButton, 250, 100 );
 
     while( running_ )
     {
@@ -80,7 +80,6 @@ int InfoScreen::run( sf::RenderWindow &app )
                     sf::Vector2f mousePositionCoordinates( mousePosition.x, mousePosition.y );
                     if( backButton.getShape().getGlobalBounds().contains( mousePositionCoordinates ) )
                     {
-                        backButton.setButtonCounter( 0 );
                         return 1;
                     }
                     break;
