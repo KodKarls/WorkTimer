@@ -16,7 +16,7 @@ public:
 private:
 	int getFontSize();
     void setFont();
-    void setFontSize( int fontSize = 40 );
+    void setFontSize( int fontSize = 43 );
     void setText();
     void setTextPosition();
 

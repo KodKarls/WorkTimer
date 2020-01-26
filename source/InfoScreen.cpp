@@ -14,7 +14,7 @@ InfoScreen::~InfoScreen()
 
 void InfoScreen::setFont()
 {
-	if( !font_.loadFromFile( "resource/fonts/Dekko-Regular.ttf" ) )
+	if( !font_.loadFromFile( "resource/fonts/Caveat-Regular.ttf" ) )
     {
         Logger::getLogger().write( Logger::ERROR, "Nie udało się załadować czcionki" );
     }
