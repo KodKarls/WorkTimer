@@ -26,6 +26,9 @@ namespace Utilities
 
     const std::string infoText = "Czasomierz to prosty program\ndo odliczania czasu.";
     const std::string authorsText = "Wykonali: Paula & Carolinii";
+
+    const int MINUT_CLOCK_BLOCK_SIZE = 14;
+    const int SECOND_CLOCK_BLOCK_SIZE = 14;
 }
 
 #endif

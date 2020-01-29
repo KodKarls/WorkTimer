@@ -1,6 +1,7 @@
 #ifndef CLOCK_SCREEN_HPP
 #define CLOCK_SCREEN_HPP
 
+#include "ClockBlock.hpp"
 #include "ClockButton.hpp"
 #include "EachScreen.hpp"
 #include <SFML/Graphics.hpp>
@@ -14,12 +15,14 @@ public:
 	virtual int run( sf::RenderWindow &app ) override;
 
 private:
-	void loadTexture();
-	void setTexture();
+	void prepareMinutClockBlocks();
+	void prepareSecondClockBlocks();
+	void setColonText();
 
-	sf::Texture texture_;
-	sf::Sprite sprite_;
-
+	std::vector< ClockBlock > minutClockBlocks;
+	std::vector< ClockBlock > secondClockBlocks;
+	sf::Text clockColonText_;
+	sf::Font font_;
 	sf::Event event_;
     bool running_;
 };
