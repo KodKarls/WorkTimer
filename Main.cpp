@@ -9,7 +9,7 @@ int main( int argc, char** argv )
     std::vector< EachScreen* > screens;
     int screen = 0;
 
-    sf::RenderWindow window( sf::VideoMode( Utilities::width, Utilities::height ), Utilities::appName );
+    sf::RenderWindow window( sf::VideoMode( Utilities::WIDTH, Utilities::HEIGHT ), Utilities::APP_NAME );
     logger.write( Logger::INFO, "Aplikacja została uruchomiona" );
 
     SplashScreen splashScreen = SplashScreen();

@@ -20,8 +20,8 @@ InfoButton::~InfoButton()
 
 void InfoButton::setButtonPosition()
 {
-	positionX_ = Utilities::width * 0.5 - rectangle_.getGlobalBounds().width * 0.5;
-    positionY_ = Utilities::height * 0.5 - rectangle_.getGlobalBounds().height * 0.5;
+	positionX_ = Utilities::WIDTH * 0.5 - rectangle_.getGlobalBounds().width * 0.5;
+    positionY_ = Utilities::HEIGHT * 0.5 - rectangle_.getGlobalBounds().height * 0.5;
     rectangle_.setPosition( sf::Vector2f( positionX_, positionY_ ) );
 }
 

@@ -35,18 +35,18 @@ void InfoScreen::setText()
     authorsText_.setFillColor( sf::Color::Yellow );
     infoText_.setStyle( sf::Text::Italic );
     authorsText_.setStyle( sf::Text::Bold );
-	infoText_.setString( Utilities::setPolishLetters( Utilities::infoText ) );
-    authorsText_.setString( Utilities::setPolishLetters( Utilities::authorsText ) );
+	infoText_.setString( Utilities::setPolishLetters( Utilities::INFO_TEXT ) );
+    authorsText_.setString( Utilities::setPolishLetters( Utilities::AUTHORS_TEXT ) );
 }
 
 void InfoScreen::setTextPosition()
 {
-	float positionX = Utilities::width * 0.5 - infoText_.getGlobalBounds().width * 0.5;
-    float positionY = Utilities::height * 0.33 - infoText_.getGlobalBounds().height;
+	float positionX = Utilities::WIDTH * 0.5 - infoText_.getGlobalBounds().width * 0.5;
+    float positionY = Utilities::HEIGHT * 0.33 - infoText_.getGlobalBounds().height;
     infoText_.setPosition( sf::Vector2f( positionX, positionY ) );
 
-    positionX = Utilities::width - authorsText_.getGlobalBounds().width - 30;
-    positionY = Utilities::height - 50;
+    positionX = Utilities::WIDTH - authorsText_.getGlobalBounds().width - 30;
+    positionY = Utilities::HEIGHT - 50;
     authorsText_.setPosition( sf::Vector2f( positionX, positionY ) );
 }
 
@@ -62,7 +62,7 @@ int InfoScreen::run( sf::RenderWindow &app )
     setText();
 	setTextPosition();
 
-    InfoButton backButton = InfoButton( Utilities::backButton, 250, 100 );
+    InfoButton backButton = InfoButton( Utilities::BACK_BUTTON, 250, 100 );
 
     while( running_ )
     {

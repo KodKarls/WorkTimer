@@ -1,6 +1,6 @@
 #include "../header/SplashScreen.hpp"
 
-SplashScreen::SplashScreen() :  appName_( Utilities::appName ),
+SplashScreen::SplashScreen() :  appName_( Utilities::APP_NAME ),
                                 font_( sf::Font() ), fontSize_( 0 ),
                                 text_( sf::Text() ), outputText_( "" ), letterCounter_( 0 ),
                                 screenShow_( true ), running_( true ), event_( sf::Event() )
@@ -42,8 +42,8 @@ void SplashScreen::setText()
 
 void SplashScreen::setTextPosition()
 {
-    float positionX = Utilities::width * 0.5 - text_.getGlobalBounds().width * 0.5;
-    float positionY = Utilities::height * 0.5 - text_.getGlobalBounds().height;
+    float positionX = Utilities::WIDTH * 0.5 - text_.getGlobalBounds().width * 0.5;
+    float positionY = Utilities::HEIGHT * 0.5 - text_.getGlobalBounds().height;
     text_.setPosition( sf::Vector2f( positionX, positionY ) );
 }
 

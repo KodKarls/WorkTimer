@@ -100,7 +100,7 @@ void ClockScreen::setColonText()
 
 int ClockScreen::run( sf::RenderWindow &app )
 {
-	ClockButton backButton = ClockButton( Utilities::backButton, 250, 100 );
+    ClockButton backButton = ClockButton( Utilities::BACK_BUTTON, 250, 100 );
     prepareMinutClockBlocks();
     setColonText();
     prepareSecondClockBlocks();

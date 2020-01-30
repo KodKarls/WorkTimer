@@ -37,13 +37,13 @@ void EndScreen::setText()
     endText_.setCharacterSize( getFontSize() );
     endText_.setFillColor( sf::Color::Red );
     endText_.setStyle( sf::Text::Bold );
-	endText_.setString( Utilities::endText );
+	endText_.setString( Utilities::END_TEXT );
 }
 
 void EndScreen::setTextPosition()
 {
-    float positionX = Utilities::width * 0.5 - endText_.getGlobalBounds().width * 0.5;
-    float positionY = Utilities::height * 0.5 - endText_.getGlobalBounds().height;
+    float positionX = Utilities::WIDTH * 0.5 - endText_.getGlobalBounds().width * 0.5;
+    float positionY = Utilities::HEIGHT * 0.5 - endText_.getGlobalBounds().height;
     endText_.setPosition( sf::Vector2f( positionX, positionY ) );
 }
 

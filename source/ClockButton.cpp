@@ -20,8 +20,8 @@ ClockButton::~ClockButton()
 
 void ClockButton::setButtonPosition()
 {
-	positionX_ = Utilities::width * 0.5 - rectangle_.getGlobalBounds().width * 0.5;
-    positionY_ = Utilities::height * 0.33 - rectangle_.getGlobalBounds().height * 1.5 + height_ * 2 + 70;
+	positionX_ = Utilities::WIDTH * 0.5 - rectangle_.getGlobalBounds().width * 0.5;
+    positionY_ = Utilities::HEIGHT * 0.33 - rectangle_.getGlobalBounds().height * 1.5 + height_ * 2 + 70;
     rectangle_.setPosition( sf::Vector2f( positionX_, positionY_ ) );
 }
 

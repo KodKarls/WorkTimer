@@ -14,18 +14,18 @@ namespace Utilities
     void sleep( int delay );
     sf::String setPolishLetters( const std::string& text );
 
-    const int width = 600;
-    const int height = 600;
+    const int WIDTH = 600;
+    const int HEIGHT = 600;
 
-    const std::string appName = "Czasomierz";
-    const std::string countdownButton = "Odliczaj czas";
-    const std::string infoButton = "Informacje";
-    const std::string exitButton = "Wyjście";
-    const std::string backButton = "Powrót";
-    const std::string endText = "Do zobaczenia :)";
+    const std::string APP_NAME = "Czasomierz";
+    const std::string COUNTDOWN_BUTTON = "Odliczaj czas";
+    const std::string INFO_BUTTON = "Informacje";
+    const std::string EXIT_BUTTON = "Wyjście";
+    const std::string BACK_BUTTON = "Powrót";
+    const std::string END_TEXT = "Do zobaczenia :)";
 
-    const std::string infoText = "Czasomierz to prosty program\ndo odliczania czasu.";
-    const std::string authorsText = "Wykonali: Paula & Carolinii";
+    const std::string INFO_TEXT = "Czasomierz to prosty program\ndo odliczania czasu.";
+    const std::string AUTHORS_TEXT = "Wykonali: Paula & Carolinii";
 
     const int MINUT_CLOCK_BLOCK_SIZE = 14;
     const int SECOND_CLOCK_BLOCK_SIZE = 14;
