@@ -21,13 +21,13 @@ InfoButton::~InfoButton()
 void InfoButton::setButtonPosition()
 {
 	positionX_ = Utilities::WIDTH * 0.5 - rectangle_.getGlobalBounds().width * 0.5;
-    positionY_ = Utilities::HEIGHT * 0.5 - rectangle_.getGlobalBounds().height * 0.5;
+    positionY_ = Utilities::HEIGHT * 0.7 - rectangle_.getGlobalBounds().height * 0.7;
     rectangle_.setPosition( sf::Vector2f( positionX_, positionY_ ) );
 }
 
 void InfoButton::setTextPosition()
 {
 	float positionX = getPositionX() + ( rectangle_.getGlobalBounds().width - text_.getGlobalBounds().width ) * 0.5;
-    float positionY = getPositionY() + ( rectangle_.getGlobalBounds().height - text_.getGlobalBounds().height ) * 0.5;
+    float positionY = getPositionY() + ( rectangle_.getGlobalBounds().height - text_.getGlobalBounds().height ) * 0.4;
     text_.setPosition( sf::Vector2f( positionX, positionY ) );
 }

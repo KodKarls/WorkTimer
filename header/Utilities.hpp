@@ -24,7 +24,7 @@ namespace Utilities
     const std::string BACK_BUTTON = "Powrót";
     const std::string END_TEXT = "Do zobaczenia :)";
 
-    const std::string INFO_TEXT = "Czasomierz to prosty program\ndo odliczania czasu.";
+    const std::string INFO_TEXT = "Czasomierz to prosty program\n       do odliczania czasu.";
     const std::string AUTHORS_TEXT = "Wykonali: Paula & Carolinii";
 
     const int MINUT_CLOCK_BLOCK_SIZE = 14;
