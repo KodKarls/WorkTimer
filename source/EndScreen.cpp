@@ -4,10 +4,7 @@ EndScreen::EndScreen() :    endText_( sf::Text() ),
                             font_( sf::Font() ), fontSize_( 0 ),
                             event_( sf::Event() ), running_( true )
 {
-	setFont();
-    setFontSize();
-    setText();
-	setTextPosition();
+    // Empty body
 }
 
 EndScreen::~EndScreen()
@@ -52,6 +49,11 @@ void EndScreen::setTextPosition()
 
 int EndScreen::run( sf::RenderWindow &app )
 {
+    setFont();
+    setFontSize();
+    setText();
+	setTextPosition();
+
 	while( running_ )
     {
         while( app.pollEvent( event_ ) )

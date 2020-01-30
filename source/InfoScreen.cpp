@@ -4,10 +4,7 @@ InfoScreen::InfoScreen()    : 		infoText_( sf::Text() ), authorsText_( sf::Text(
                                     font_( sf::Font() ), fontSize_( 0 ),
 								    event_( sf::Event() ), running_( true )
 {
-	setFont();
-    setFontSize();
-    setText();
-	setTextPosition();
+    // Empty body
 }
 
 InfoScreen::~InfoScreen()
@@ -60,6 +57,11 @@ int InfoScreen::getFontSize()
 
 int InfoScreen::run( sf::RenderWindow &app )
 {
+    setFont();
+    setFontSize();
+    setText();
+	setTextPosition();
+
     InfoButton backButton = InfoButton( Utilities::backButton, 250, 100 );
 
     while( running_ )

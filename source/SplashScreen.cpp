@@ -5,9 +5,7 @@ SplashScreen::SplashScreen() :  appName_( Utilities::appName ),
                                 text_( sf::Text() ), outputText_( "" ), letterCounter_( 0 ),
                                 screenShow_( true ), running_( true ), event_( sf::Event() )
 {
-    setFont();
-    setFontSize();
-    setText();
+    // Empty body
 }
 
 SplashScreen::~SplashScreen()
@@ -73,6 +71,10 @@ bool SplashScreen::checkIsShow()
 
 int SplashScreen::run( sf::RenderWindow &app )
 {
+    setFont();
+    setFontSize();
+    setText();
+
     while( running_ )
     {
         while( app.pollEvent( event_ ) )
