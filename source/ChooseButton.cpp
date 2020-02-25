@@ -1,6 +1,6 @@
-#include "../header/ClockButton.hpp"
+#include "../header/ChooseButton.hpp"
 
-ClockButton::ClockButton( std::string name, int width, int height )
+ChooseButton::ChooseButton( std::string name, int width, int height )
 {
 	name_ = name;
 	width_ = width;
@@ -13,19 +13,27 @@ ClockButton::ClockButton( std::string name, int width, int height )
     setTextPosition();
 }
 
-ClockButton::~ClockButton()
+ChooseButton::~ChooseButton()
 {
-
+	// Empty body
 }
 
-void ClockButton::setButtonPosition()
+void ChooseButton::changeButtonPosition( float posX, float posY )
+{
+	positionX_ = posX;
+	positionY_ = posY;
+	rectangle_.setPosition( sf::Vector2f( posX, posY ) );
+	setTextPosition();
+}
+
+void ChooseButton::setButtonPosition()
 {
 	positionX_ = Utilities::WIDTH * 0.5 - rectangle_.getGlobalBounds().width * 0.5;
-    positionY_ = Utilities::HEIGHT * 0.33 - rectangle_.getGlobalBounds().height * 1.5 + height_ * 2 + 280;
+    positionY_ = Utilities::HEIGHT * 0.33 - rectangle_.getGlobalBounds().height * 1.5 + height_ * 2 + 150;
     rectangle_.setPosition( sf::Vector2f( positionX_, positionY_ ) );
 }
 
-void ClockButton::setTextPosition()
+void ChooseButton::setTextPosition()
 {
 	float positionX = getPositionX() + ( rectangle_.getGlobalBounds().width - text_.getGlobalBounds().width ) * 0.5;
     float positionY = getPositionY() + ( rectangle_.getGlobalBounds().height - text_.getGlobalBounds().height ) * 0.3;

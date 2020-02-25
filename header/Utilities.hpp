@@ -29,6 +29,12 @@ namespace Utilities
 
     const int MINUT_CLOCK_BLOCK_SIZE = 14;
     const int SECOND_CLOCK_BLOCK_SIZE = 14;
+
+    const std::string CHOICE_BUTTON = "Wybierz opcje";
+    const std::string FIVE_MINUT = "5 minut";
+    const std::string FIFTEEN_MINUT = "15 minut";
+    const std::string THIRTY_MINUT = "30 minut";
+    const std::string FOURTY_FIVE_MINUT = "45 minut";
 }
 
 #endif

@@ -3,6 +3,7 @@
 
 #include "ClockBlock.hpp"
 #include "ClockButton.hpp"
+#include "ChooseButton.hpp"
 #include "EachScreen.hpp"
 #include <SFML/Graphics.hpp>
 

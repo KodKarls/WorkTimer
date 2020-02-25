@@ -1,6 +1,6 @@
 CXX = g++
 CXXFLAGS = -Wall -std=c++11
-OBJS = Main.o Logger.o SplashScreen.o Utilities.o Button.o ClockButton.o MenuButton.o InfoButton.o Menu.o InfoScreen.o ClockScreen.o ClockBlock.o EndScreen.o
+OBJS = Main.o Logger.o SplashScreen.o Utilities.o Button.o ClockButton.o ChooseButton.o MenuButton.o InfoButton.o Menu.o InfoScreen.o ClockScreen.o ClockBlock.o EndScreen.o
 LIBDIR=lib
 
 LDFLAGS = -L$(LIBDIR)/SFML/lib
@@ -28,6 +28,9 @@ Button.o: source/Button.cpp header/Button.hpp header/Logger.hpp
 	$(CXX) -g -c $(CPPFLAGS) $< -o $@
 
 ClockButton.o: source/ClockButton.cpp header/ClockButton.hpp header/Button.hpp
+	$(CXX) -g -c $(CPPFLAGS) $< -o $@
+
+ChooseButton.o: source/ChooseButton.cpp header/ChooseButton.hpp header/Button.hpp
 	$(CXX) -g -c $(CPPFLAGS) $< -o $@
 
 MenuButton.o: source/MenuButton.cpp header/MenuButton.hpp header/Button.hpp
