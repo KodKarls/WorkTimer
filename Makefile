@@ -9,7 +9,7 @@ CPPFLAGS = -I$(LIBDIR)/SFML/include
 LDDEBUGLIBS = -lsfml-graphics-d -lsfml-window-d -lsfml-audio-d -lsfml-system-d -mwindows
 LDRELEASELIBS = -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-system -mwindows
 
-debug: $(OBJS)
+all: $(OBJS)
 	$(CXX) -g $^ $(LDFLAGS) $(LDDEBUGLIBS) -o WorkTimer
 
 Main.o: Main.cpp header/Logger.hpp header/screens.hpp header/EachScreen.hpp
