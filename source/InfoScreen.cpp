@@ -84,11 +84,10 @@ int InfoScreen::run( sf::RenderWindow &app )
                     {
                         return 1;
                     }
-                    break;
-                }
-                default:
-                {
-                    Logger::getLogger().write( Logger::INFO, "Nie ma takiego zdarzenia!" );
+                    else
+                    {
+                        Logger::getLogger().write( Logger::INFO, "Nie ma takiego zdarzenia!" );
+                    }
                     break;
                 }
             }

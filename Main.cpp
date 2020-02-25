@@ -28,5 +28,6 @@ int main( int argc, char** argv )
         screen = screens[ screen ]->run( window );
     }
 
+    logger.write( Logger::INFO, "Aplikacja zamknięta poprawnie" );
     return EXIT_SUCCESS;
 }

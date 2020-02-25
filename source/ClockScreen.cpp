@@ -150,7 +150,7 @@ int ClockScreen::run( sf::RenderWindow &app )
                         minutClockBlocks[ 8 ].setColor( 0, 0, 0, 0 );
                         minutClockBlocks[ 9 ].setColor( 0, 0, 0, 0 );
                     }
-                    if( fifteenMinutButton.getShape().getGlobalBounds().contains( mousePositionCoordinates ) )
+                    else if( fifteenMinutButton.getShape().getGlobalBounds().contains( mousePositionCoordinates ) )
                     {
                         for( int i = 0; i < Utilities::MINUT_CLOCK_BLOCK_SIZE; ++i )
                         {
@@ -167,7 +167,7 @@ int ClockScreen::run( sf::RenderWindow &app )
                         minutClockBlocks[ 8 ].setColor( 0, 0, 0, 0 );
                         minutClockBlocks[ 9 ].setColor( 0, 0, 0, 0 );
                     }
-                    if( thirtyMinutButton.getShape().getGlobalBounds().contains( mousePositionCoordinates ) )
+                    else if( thirtyMinutButton.getShape().getGlobalBounds().contains( mousePositionCoordinates ) )
                     {
                         for( int i = 0; i < Utilities::MINUT_CLOCK_BLOCK_SIZE; ++i )
                         {
@@ -180,7 +180,7 @@ int ClockScreen::run( sf::RenderWindow &app )
                         minutClockBlocks[ 0 ].setColor( 0, 0, 0, 0 );
                         minutClockBlocks[ 2 ].setColor( 0, 0, 0, 0 );
                     }
-                    if( fourtyFiveMinutButton.getShape().getGlobalBounds().contains( mousePositionCoordinates ) )
+                    else if( fourtyFiveMinutButton.getShape().getGlobalBounds().contains( mousePositionCoordinates ) )
                     {
                         for( int i = 0; i < Utilities::MINUT_CLOCK_BLOCK_SIZE; ++i )
                         {
@@ -195,15 +195,14 @@ int ClockScreen::run( sf::RenderWindow &app )
                         minutClockBlocks[ 8 ].setColor( 0, 0, 0, 0 );
                         minutClockBlocks[ 9 ].setColor( 0, 0, 0, 0 );
                     }
-                    if( backButton.getShape().getGlobalBounds().contains( mousePositionCoordinates ) )
+                    else if( backButton.getShape().getGlobalBounds().contains( mousePositionCoordinates ) )
                     {
                         return 1;
                     }
-                }
-                default:
-                {
-                    Logger::getLogger().write( Logger::INFO, "Nie ma takiego zdarzenia!" );
-                    break;
+                    else
+                    {
+                        Logger::getLogger().write( Logger::INFO, "Nie ma takiego zdarzenia!" );
+                    }
                 }
             }
         }
