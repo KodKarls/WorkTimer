@@ -20,6 +20,7 @@ void ClockScreen::prepareMinutClockBlocks()
 
     ClockBlock minClockBlock5 = ClockBlock( 60, 10, 70, 30 );
     ClockBlock minClockBlock6 = ClockBlock( 60, 10, 70, 120 );
+    minClockBlock6.setColor( 0, 0, 0, 0 );
     ClockBlock minClockBlock7 = ClockBlock( 60, 10, 70, 210 );
 
     ClockBlock minClockBlock8 = ClockBlock( 10, 60, 170, 50 );
@@ -29,6 +30,7 @@ void ClockScreen::prepareMinutClockBlocks()
 
     ClockBlock minClockBlock12 = ClockBlock( 60, 10, 180, 30 );
     ClockBlock minClockBlock13 = ClockBlock( 60, 10, 180, 120 );
+    minClockBlock13.setColor( 0, 0, 0, 0 );
     ClockBlock minClockBlock14 = ClockBlock( 60, 10, 180, 210 );
 
     minutClockBlocks.push_back( minClockBlock1 );
@@ -56,6 +58,7 @@ void ClockScreen::prepareSecondClockBlocks()
 
     ClockBlock secClockBlock5 = ClockBlock( 60, 10, 350, 30 );
     ClockBlock secClockBlock6 = ClockBlock( 60, 10, 350, 120 );
+    secClockBlock6.setColor( 0, 0, 0, 0 );
     ClockBlock secClockBlock7 = ClockBlock( 60, 10, 350, 210 );
 
     ClockBlock secClockBlock8 = ClockBlock( 10, 60, 450, 50 );
@@ -65,6 +68,7 @@ void ClockScreen::prepareSecondClockBlocks()
 
     ClockBlock secClockBlock12 = ClockBlock( 60, 10, 460, 30 );
     ClockBlock secClockBlock13 = ClockBlock( 60, 10, 460, 120 );
+    secClockBlock13.setColor( 0, 0, 0, 0 );
     ClockBlock secClockBlock14 = ClockBlock( 60, 10, 460, 210 );
 
     secondClockBlocks.push_back( secClockBlock1 );
@@ -133,6 +137,64 @@ int ClockScreen::run( sf::RenderWindow &app )
                 {
                     sf::Vector2i mousePosition = sf::Mouse::getPosition( app );
                     sf::Vector2f mousePositionCoordinates( mousePosition.x, mousePosition.y );
+                    if( fiveMinutButton.getShape().getGlobalBounds().contains( mousePositionCoordinates ) )
+                    {
+                        for( int i = 0; i < Utilities::MINUT_CLOCK_BLOCK_SIZE; ++i )
+                        {
+                            minutClockBlocks[ i ].setColor();
+                            secondClockBlocks[ i ].setColor();
+                        }
+                        minutClockBlocks[ 5 ].setColor( 0, 0, 0, 0 );
+                        secondClockBlocks[ 5 ].setColor( 0, 0, 0, 0 );
+                        secondClockBlocks[ 12 ].setColor( 0, 0, 0, 0 );
+                        minutClockBlocks[ 8 ].setColor( 0, 0, 0, 0 );
+                        minutClockBlocks[ 9 ].setColor( 0, 0, 0, 0 );
+                    }
+                    if( fifteenMinutButton.getShape().getGlobalBounds().contains( mousePositionCoordinates ) )
+                    {
+                        for( int i = 0; i < Utilities::MINUT_CLOCK_BLOCK_SIZE; ++i )
+                        {
+                            minutClockBlocks[ i ].setColor();
+                            secondClockBlocks[ i ].setColor();
+                        }
+                        secondClockBlocks[ 5 ].setColor( 0, 0, 0, 0 );
+                        secondClockBlocks[ 12 ].setColor( 0, 0, 0, 0 );
+                        minutClockBlocks[ 0 ].setColor( 0, 0, 0, 0 );
+                        minutClockBlocks[ 2 ].setColor( 0, 0, 0, 0 );
+                        minutClockBlocks[ 4 ].setColor( 0, 0, 0, 0 );
+                        minutClockBlocks[ 5 ].setColor( 0, 0, 0, 0 );
+                        minutClockBlocks[ 6 ].setColor( 0, 0, 0, 0 );
+                        minutClockBlocks[ 8 ].setColor( 0, 0, 0, 0 );
+                        minutClockBlocks[ 9 ].setColor( 0, 0, 0, 0 );
+                    }
+                    if( thirtyMinutButton.getShape().getGlobalBounds().contains( mousePositionCoordinates ) )
+                    {
+                        for( int i = 0; i < Utilities::MINUT_CLOCK_BLOCK_SIZE; ++i )
+                        {
+                            minutClockBlocks[ i ].setColor();
+                            secondClockBlocks[ i ].setColor();
+                        }
+                        minutClockBlocks[ 12 ].setColor( 0, 0, 0, 0 );
+                        secondClockBlocks[ 5 ].setColor( 0, 0, 0, 0 );
+                        secondClockBlocks[ 12 ].setColor( 0, 0, 0, 0 );
+                        minutClockBlocks[ 0 ].setColor( 0, 0, 0, 0 );
+                        minutClockBlocks[ 2 ].setColor( 0, 0, 0, 0 );
+                    }
+                    if( fourtyFiveMinutButton.getShape().getGlobalBounds().contains( mousePositionCoordinates ) )
+                    {
+                        for( int i = 0; i < Utilities::MINUT_CLOCK_BLOCK_SIZE; ++i )
+                        {
+                            minutClockBlocks[ i ].setColor();
+                            secondClockBlocks[ i ].setColor();
+                        }
+                        secondClockBlocks[ 5 ].setColor( 0, 0, 0, 0 );
+                        secondClockBlocks[ 12 ].setColor( 0, 0, 0, 0 );
+                        minutClockBlocks[ 2 ].setColor( 0, 0, 0, 0 );
+                        minutClockBlocks[ 4 ].setColor( 0, 0, 0, 0 );
+                        minutClockBlocks[ 6 ].setColor( 0, 0, 0, 0 );
+                        minutClockBlocks[ 8 ].setColor( 0, 0, 0, 0 );
+                        minutClockBlocks[ 9 ].setColor( 0, 0, 0, 0 );
+                    }
                     if( backButton.getShape().getGlobalBounds().contains( mousePositionCoordinates ) )
                     {
                         return 1;
