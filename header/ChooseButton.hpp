@@ -11,9 +11,8 @@ public:
 
 	void changeButtonPosition( float posX, float posY );
 
-private:
 	virtual void setButtonPosition() override;
-    virtual void setTextPosition() override;
+	virtual void setTextPosition() override;
 };
 
 #endif

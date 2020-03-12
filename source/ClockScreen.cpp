@@ -102,6 +102,12 @@ void ClockScreen::setColonText()
     clockColonText_.setPosition( sf::Vector2f( 290, 80 ) );
 }
 
+void ClockScreen::changeChoiceButtonText( ChooseButton& chooseButton )
+{
+    chooseButton.getText().setString(Utilities::START_BUTTON);
+    chooseButton.setTextPosition();
+}
+
 int ClockScreen::run( sf::RenderWindow &app )
 {
     prepareMinutClockBlocks();
@@ -149,6 +155,7 @@ int ClockScreen::run( sf::RenderWindow &app )
                         secondClockBlocks[ 12 ].setColor( 0, 0, 0, 0 );
                         minutClockBlocks[ 8 ].setColor( 0, 0, 0, 0 );
                         minutClockBlocks[ 9 ].setColor( 0, 0, 0, 0 );
+                        changeChoiceButtonText( choiceButton );
                     }
                     else if( fifteenMinutButton.getShape().getGlobalBounds().contains( mousePositionCoordinates ) )
                     {
@@ -166,6 +173,7 @@ int ClockScreen::run( sf::RenderWindow &app )
                         minutClockBlocks[ 6 ].setColor( 0, 0, 0, 0 );
                         minutClockBlocks[ 8 ].setColor( 0, 0, 0, 0 );
                         minutClockBlocks[ 9 ].setColor( 0, 0, 0, 0 );
+                        changeChoiceButtonText( choiceButton );
                     }
                     else if( thirtyMinutButton.getShape().getGlobalBounds().contains( mousePositionCoordinates ) )
                     {
@@ -179,6 +187,7 @@ int ClockScreen::run( sf::RenderWindow &app )
                         secondClockBlocks[ 12 ].setColor( 0, 0, 0, 0 );
                         minutClockBlocks[ 0 ].setColor( 0, 0, 0, 0 );
                         minutClockBlocks[ 2 ].setColor( 0, 0, 0, 0 );
+                        changeChoiceButtonText( choiceButton );
                     }
                     else if( fourtyFiveMinutButton.getShape().getGlobalBounds().contains( mousePositionCoordinates ) )
                     {
@@ -194,6 +203,7 @@ int ClockScreen::run( sf::RenderWindow &app )
                         minutClockBlocks[ 6 ].setColor( 0, 0, 0, 0 );
                         minutClockBlocks[ 8 ].setColor( 0, 0, 0, 0 );
                         minutClockBlocks[ 9 ].setColor( 0, 0, 0, 0 );
+                        changeChoiceButtonText( choiceButton );
                     }
                     else if( backButton.getShape().getGlobalBounds().contains( mousePositionCoordinates ) )
                     {

@@ -35,6 +35,7 @@ namespace Utilities
     const std::string FIFTEEN_MINUT = "15 minut";
     const std::string THIRTY_MINUT = "30 minut";
     const std::string FOURTY_FIVE_MINUT = "45 minut";
+    const std::string START_BUTTON = "Start";
 }
 
 #endif

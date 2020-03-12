@@ -19,6 +19,7 @@ private:
 	void prepareMinutClockBlocks();
 	void prepareSecondClockBlocks();
 	void setColonText();
+	void changeChoiceButtonText( ChooseButton& chooseButton );
 
 	std::vector< ClockBlock > minutClockBlocks;
 	std::vector< ClockBlock > secondClockBlocks;
