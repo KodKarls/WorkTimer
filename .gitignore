@@ -1,19 +1,7 @@
 #.gitignore
 
-###### LIBRARIES
-lib/
-
-###### RUBBISH FOLDERS
-resource/audio/
-dokumentacja/
-files/
-bin/
-
-###### RUBBISH FILES
-FlagaConsola.txt
-WorkTimer.exe
-*.dll
-*.o
-
-###### VISUAL STUDIO CODE
+# Visual Studio Code files
 .vscode/
+
+# Build results
+bin/
