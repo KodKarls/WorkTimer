@@ -1,15 +1,7 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-#include <iostream>
-#include <cstdlib>
-#include <string>
-#include <sstream>
-#include <fstream>
-
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
+#include "MainMenuState.hpp"
 
 class App
 {
@@ -38,6 +30,7 @@ private:
 	// Init functions
 	void initVariables();
 	void initWindow();
+	void initStates();
 
 	// Window variables
 	sf::RenderWindow* window;
@@ -48,6 +41,9 @@ private:
 	// Update variables
 	sf::Clock dtClock;
 	float dt;
+
+	// States variables
+	std::stack< State* > states;
 };
 
 #endif

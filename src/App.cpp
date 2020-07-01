@@ -39,15 +39,27 @@ void App::initWindow()
 	this->window->setVerticalSyncEnabled( verticalSyncEnabled );
 }
 
+void App::initStates()
+{
+	this->states.push( new MainMenuState{ this->window, &this->states } );
+}
+
 App::App()
 {
 	this->initVariables();
 	this->initWindow();
+	this->initStates();
 }
 
 App::~App()
 {
-	// Empty body
+	delete this->window;
+
+	while( !( this->states.top() ) )
+	{
+		delete this->states.top();
+		this->states.pop();
+	}
 }
 
 // Regular functions
@@ -76,8 +88,23 @@ void App::update()
 {
 	this->updateSFMLEvents();
 
-	// Prepare states
-	// ...
+	if( !( this->states.empty() ) )
+	{
+		this->states.top()->update( this->dt );
+
+		if( this->states.top()->getQuit() )
+		{
+			this->states.top()->endState();
+			delete this->states.top();
+			this->states.pop();
+		}
+	}
+	// Application end
+	else
+	{
+		this->endApplication();
+		this->window->close();
+	}
 }
 
 // Render function
@@ -86,7 +113,8 @@ void App::render()
 	this->window->clear();
 
 	// Render all things
-	// ..
+	if( !( this->states.empty() ) )
+		this->states.top()->render();
 
 	this->window->display();
 }
