@@ -42,7 +42,7 @@ void MainMenuState::initButtons()
 	);
 
 	this->buttons[ "EXIT_STATE" ] = new Button( 280.f, 470.f, 250.f, 50.f,
-		&this->font, "Wyjście", 50,
+		&this->font, Utitilies::setPolishSigns( "Wyjście" ), 50,
 		sf::Color( 70, 70, 70, 200 ), sf::Color( 250, 250, 250, 250 ), sf::Color( 20, 30, 20, 50 ),
 		sf::Color( 100, 100, 100, 0 ), sf::Color( 150, 150, 150, 0 ), sf::Color( 20, 30, 20, 0 )
 	);

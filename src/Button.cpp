@@ -2,7 +2,7 @@
 
 // Constructors
 Button::Button( float x, float y, float width, float height,
-		sf::Font* font, std::string text, unsigned int characterSize,
+		sf::Font* font, sf::String text, unsigned int characterSize,
 		sf::Color textIdleColor, sf::Color textHoverColor, sf::Color textActiveColor,
 		sf::Color idleColor, sf::Color hoverColor, sf::Color activeColor )
 {
@@ -14,7 +14,7 @@ Button::Button( float x, float y, float width, float height,
 
 	this->font = font;
 	this->text.setFont( *this->font );
-	this->text.setString( Utitilies::setPolishSigns( text ) );
+	this->text.setString( text );
 	this->text.setFillColor( textIdleColor );
 	this->text.setCharacterSize( characterSize );
 	this->text.setPosition(
