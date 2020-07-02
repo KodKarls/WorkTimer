@@ -44,6 +44,7 @@ void App::initStates()
 	this->states.push( new MainMenuState{ this->window, &this->states } );
 }
 
+// Constructors
 App::App()
 {
 	this->initVariables();
@@ -51,6 +52,7 @@ App::App()
 	this->initStates();
 }
 
+// Destruktor
 App::~App()
 {
 	delete this->window;

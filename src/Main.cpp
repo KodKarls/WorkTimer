@@ -2,9 +2,9 @@
 
 int main( int argc, char** argv )
 {
-    App game;
+    App app;
 
-    game.run();
+    app.run();
 
     return 0;
 }

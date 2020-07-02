@@ -1,5 +1,6 @@
 #include "State.hpp"
 
+// Constructors
 State::State( sf::RenderWindow* window, std::stack< State* >* states )
 {
 	this->window = window;
@@ -7,6 +8,7 @@ State::State( sf::RenderWindow* window, std::stack< State* >* states )
 	this->quit = false;
 }
 
+// Destructor
 State::~State()
 {
 	// Empty body
