@@ -29,7 +29,7 @@ void InfoState::initFonts()
 void InfoState::initButtons()
 {
 	this->buttons[ "BACK_STATE" ] = new Button( 370.f, 470.f, 250.f, 50.f,
-		&this->font, Utitilies::setPolishSigns( "Powrót" ), 50,
+		&this->font, Utitilies::setPolishSigns( "Powrót" ), 52,
 		sf::Color( 0, 51, 102, 230 ), sf::Color( 51, 204, 0, 230 ), sf::Color( 20, 30, 20, 50 ),
 		sf::Color( 100, 100, 100, 0 ), sf::Color( 150, 150, 150, 0 ), sf::Color( 20, 30, 20, 0 )
 	);
