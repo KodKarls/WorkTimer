@@ -1,7 +1,7 @@
 #ifndef BUTTON_HPP
 #define BUTTON_HPP
 
-#include "Utilities.hpp"
+#include "State.hpp"
 
 enum class ButtonState : short unsigned
 {

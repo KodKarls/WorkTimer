@@ -1,7 +1,6 @@
 #ifndef MAINMENUSTATE_HPP
 #define MAINMENUSTATE_HPP
 
-#include "State.hpp"
 #include "Button.hpp"
 
 class MainMenuState : public State
