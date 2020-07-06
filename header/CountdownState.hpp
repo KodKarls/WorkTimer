@@ -1,18 +1,16 @@
-#ifndef MAINMENUSTATE_HPP
-#define MAINMENUSTATE_HPP
+#ifndef COUNTDOWN_STATE_HPP
+#define COUNTDOWN_STATE_HPP
 
 #include "Button.hpp"
-#include "CountdownState.hpp"
-#include "InfoState.hpp"
 
-class MainMenuState : public State
+class CountdownState : public State
 {
 public:
 	// Constructors
-	MainMenuState( sf::RenderWindow* window, std::stack< State* >* states );
+	CountdownState( sf::RenderWindow* window, std::stack< State* >* states );
 
-	// Destructor
-	~MainMenuState();
+ 	// Destruktor
+	~CountdownState();
 
 	// Update functions
 	void update( const float& dt ) override;

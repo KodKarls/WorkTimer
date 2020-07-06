@@ -1,24 +1,24 @@
-#include "MainMenuState.hpp"
+#include "CountdownState.hpp"
 
 // Init functions
-void MainMenuState::initVariables()
+void CountdownState::initVariables()
 {
 	// Empty body
 }
 
-void MainMenuState::initBackground()
+void CountdownState::initBackground()
 {
 	this->background.setSize( sf::Vector2f( static_cast< float >( this->window->getSize().x ), static_cast< float >( this->window->getSize().y ) ) );
-	if( !this->backgroundTexture.loadFromFile( "res/images/Figaro1.png" ) )
+	if( !this->backgroundTexture.loadFromFile( "res/images/Figaro3.png" ) )
 	{
 		// Think about error logging system
-		std::cout << "Error: cannot load background texture\n";
+		std::cout << "Error: cannot load Figaro3 texture\n";
 		return;
 	}
 	this->background.setTexture( &this->backgroundTexture );
 }
 
-void MainMenuState::initFonts()
+void CountdownState::initFonts()
 {
 	if( !this->font.loadFromFile( "res/fonts/LifeSavers-Bold.ttf" ) )
 	{
@@ -27,30 +27,35 @@ void MainMenuState::initFonts()
 	}
 }
 
-void MainMenuState::initButtons()
+void CountdownState::initButtons()
 {
-	this->buttons[ "COUNTDOWN_STATE" ] = new Button( 250.f, 170.f, 250.f, 50.f,
-		&this->font, "Ustaw odliczanie", 52,
+	this->buttons[ "FIFTEEN_MINUTES" ] = new Button( 250.f, 150.f, 250.f, 50.f,
+		&this->font, "15 minut", 52,
 		sf::Color( 51, 204, 0, 230 ), sf::Color( 0, 51, 102, 230 ), sf::Color( 20, 30, 20, 50 ),
 		sf::Color( 70, 70, 70, 0 ), sf::Color( 150, 150, 150, 0 ), sf::Color( 20, 30, 20, 0 )
 	);
 
-	this->buttons[ "INFO_STATE" ] = new Button( 250.f, 270.f, 250.f, 50.f,
-		&this->font, "Informacje", 52,
+	this->buttons[ "THIRTY_MINUTES" ] = new Button( 250.f, 250.f, 250.f, 50.f,
+		&this->font, "30 minut", 52,
 		sf::Color( 51, 204, 0, 230 ), sf::Color( 0, 51, 102, 230 ), sf::Color( 20, 30, 20, 50 ),
 		sf::Color( 70, 70, 70, 0 ), sf::Color( 150, 150, 150, 0 ), sf::Color( 20, 30, 20, 0 )
 	);
 
+	this->buttons[ "FORTY_FIVE_MINUTES" ] = new Button( 250.f, 350.f, 250.f, 50.f,
+		&this->font, "45 minut", 52,
+		sf::Color( 51, 204, 0, 230 ), sf::Color( 0, 51, 102, 230 ), sf::Color( 20, 30, 20, 50 ),
+		sf::Color( 70, 70, 70, 0 ), sf::Color( 150, 150, 150, 0 ), sf::Color( 20, 30, 20, 0 )
+	);
 
-	this->buttons[ "EXIT_STATE" ] = new Button( 250.f, 470.f, 250.f, 50.f,
-		&this->font, Utitilies::setPolishSigns( "Wyjście" ), 52,
+	this->buttons[ "BACK_STATE" ] = new Button( 250.f, 500.f, 250.f, 50.f,
+		&this->font, Utitilies::setPolishSigns( "Powrót" ), 52,
 		sf::Color( 51, 204, 0, 230 ), sf::Color( 0, 51, 102, 230 ), sf::Color( 20, 30, 20, 50 ),
 		sf::Color( 100, 100, 100, 0 ), sf::Color( 150, 150, 150, 0 ), sf::Color( 20, 30, 20, 0 )
 	);
 }
 
 // Constructors
-MainMenuState::MainMenuState( sf::RenderWindow* window, std::stack< State* >* states )
+CountdownState::CountdownState( sf::RenderWindow* window, std::stack< State* >* states )
 	: State( window, states )
 {
 	this->initVariables();
@@ -59,8 +64,8 @@ MainMenuState::MainMenuState( sf::RenderWindow* window, std::stack< State* >* st
 	this->initButtons();
 }
 
-// Destructor
-MainMenuState::~MainMenuState()
+// Destruktor
+CountdownState::~CountdownState()
 {
 	auto it = this->buttons.begin();
 	for( ; it != this->buttons.end(); ++it )
@@ -68,19 +73,19 @@ MainMenuState::~MainMenuState()
 }
 
 // Update functions
-void MainMenuState::update( const float& dt )
+void CountdownState::update( const float& dt )
 {
 	this->updateMousePositions();
 	this->updateInput( dt );
 	this->updateButtons();
 }
 
-void MainMenuState::updateInput( const float& dt )
+void CountdownState::updateInput( const float& dt )
 {
 	// Update player input
 }
 
-void MainMenuState::updateButtons()
+void CountdownState::updateButtons()
 {
 	// Update all the buttons in the state and handles their functionality
 	for( auto &it : this->buttons )
@@ -88,21 +93,22 @@ void MainMenuState::updateButtons()
 		it.second->update( this->mousePosView );
 	}
 
-	// Set countdown
-	if( this->buttons[ "COUNTDOWN_STATE" ]->isPressed() )
-		this->states->push( new CountdownState{ this->window, this->states } );
+	// Set fifteen minutes
 
-	// Info
-	if( this->buttons[ "INFO_STATE" ]->isPressed() )
-		this->states->push( new InfoState{ this->window, this->states } );
 
-	// Quit the game
-	if( this->buttons[ "EXIT_STATE" ]->isPressed() )
+	// Set thirty minutes
+
+
+	// Set forty-five minutes
+
+
+	// Back to the menu
+	if( this->buttons[ "BACK_STATE" ]->isPressed() )
 		this->endState();
 }
 
 // Render functions
-void MainMenuState::render( sf::RenderTarget* target )
+void CountdownState::render( sf::RenderTarget* target )
 {
 	if( !target )
 		target = this->window;
@@ -111,7 +117,7 @@ void MainMenuState::render( sf::RenderTarget* target )
 	this->renderButtons( target );
 }
 
-void MainMenuState::renderButtons( sf::RenderTarget* target )
+void CountdownState::renderButtons( sf::RenderTarget* target )
 {
 	for( auto &it : this->buttons )
 		it.second->render( target );
