@@ -9,7 +9,7 @@ void MainMenuState::initVariables()
 void MainMenuState::initBackground()
 {
 	this->background.setSize( sf::Vector2f( static_cast< float >( this->window->getSize().x ), static_cast< float >( this->window->getSize().y ) ) );
-	if( !this->backgroundTexture.loadFromFile( "res/images/background.png" ) )
+	if( !this->backgroundTexture.loadFromFile( "res/images/Figaro1.png" ) )
 	{
 		// Think about error logging system
 		std::cout << "Error: cannot load background texture\n";
@@ -20,7 +20,7 @@ void MainMenuState::initBackground()
 
 void MainMenuState::initFonts()
 {
-	if( !this->font.loadFromFile( "res/fonts/arial.ttf" ) )
+	if( !this->font.loadFromFile( "res/fonts/LifeSavers-Bold.ttf" ) )
 	{
 		// Think about error logging system
 		std::cout << "Error: cannot find font arial\n";
@@ -29,21 +29,22 @@ void MainMenuState::initFonts()
 
 void MainMenuState::initButtons()
 {
-	this->buttons[ "CLOCK_STATE" ] = new Button( 280.f, 170.f, 250.f, 50.f,
-		&this->font, "Ustaw odliczanie", 50,
-		sf::Color( 70, 70, 70, 200 ), sf::Color( 250, 250, 250, 250 ), sf::Color( 20, 30, 20, 50 ),
+	this->buttons[ "CLOCK_STATE" ] = new Button( 250.f, 170.f, 250.f, 50.f,
+		&this->font, "Ustaw odliczanie", 52,
+		sf::Color( 51, 204, 0, 230 ), sf::Color( 0, 51, 102, 230 ), sf::Color( 20, 30, 20, 50 ),
 		sf::Color( 70, 70, 70, 0 ), sf::Color( 150, 150, 150, 0 ), sf::Color( 20, 30, 20, 0 )
 	);
 
-	this->buttons[ "INFO_STATE" ] = new Button( 280.f, 270.f, 250.f, 50.f,
-		&this->font, "Informacje", 50,
-		sf::Color( 70, 70, 70, 200 ), sf::Color( 250, 250, 250, 250 ), sf::Color( 20, 30, 20, 50 ),
+	this->buttons[ "INFO_STATE" ] = new Button( 250.f, 270.f, 250.f, 50.f,
+		&this->font, "Informacje", 52,
+		sf::Color( 51, 204, 0, 230 ), sf::Color( 0, 51, 102, 230 ), sf::Color( 20, 30, 20, 50 ),
 		sf::Color( 70, 70, 70, 0 ), sf::Color( 150, 150, 150, 0 ), sf::Color( 20, 30, 20, 0 )
 	);
 
-	this->buttons[ "EXIT_STATE" ] = new Button( 280.f, 470.f, 250.f, 50.f,
-		&this->font, Utitilies::setPolishSigns( "Wyjście" ), 50,
-		sf::Color( 70, 70, 70, 200 ), sf::Color( 250, 250, 250, 250 ), sf::Color( 20, 30, 20, 50 ),
+
+	this->buttons[ "EXIT_STATE" ] = new Button( 250.f, 470.f, 250.f, 50.f,
+		&this->font, Utitilies::setPolishSigns( "Wyjście" ), 52,
+		sf::Color( 51, 204, 0, 230 ), sf::Color( 0, 51, 102, 230 ), sf::Color( 20, 30, 20, 50 ),
 		sf::Color( 100, 100, 100, 0 ), sf::Color( 150, 150, 150, 0 ), sf::Color( 20, 30, 20, 0 )
 	);
 }
