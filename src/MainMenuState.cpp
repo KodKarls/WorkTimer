@@ -92,7 +92,8 @@ void MainMenuState::updateButtons()
 
 
 	// Info
-
+	if( this->buttons[ "INFO_STATE" ]->isPressed() )
+		this->states->push( new InfoState{ this->window, this->states } );
 
 	// Quit the game
 	if( this->buttons[ "EXIT_STATE" ]->isPressed() )

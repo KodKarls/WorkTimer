@@ -1,17 +1,16 @@
-#ifndef MAINMENUSTATE_HPP
-#define MAINMENUSTATE_HPP
+#ifndef INFOSTATE_HPP
+#define INFOSTATE_HPP
 
 #include "Button.hpp"
-#include "InfoState.hpp"
 
-class MainMenuState : public State
+class InfoState : public State
 {
 public:
 	// Constructors
-	MainMenuState( sf::RenderWindow* window, std::stack< State* >* states );
+	InfoState(sf::RenderWindow* window, std::stack< State* >* states);
 
-	// Destructor
-	~MainMenuState();
+ 	// Destruktor
+	~InfoState();
 
 	// Update functions
 	void update( const float& dt ) override;
