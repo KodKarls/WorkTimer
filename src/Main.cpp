@@ -1,9 +1,8 @@
-#include "App.hpp"
+#include "Application.hpp"
 
 int main( int argc, char** argv )
 {
-    App app;
-
+    auto app = Application{};
     app.run();
 
     return 0;
