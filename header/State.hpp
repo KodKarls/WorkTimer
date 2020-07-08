@@ -3,6 +3,8 @@
 
 #include <memory>
 
+#include <SFML/Window/Mouse.hpp>
+
 class StateMachine;
 
 namespace sf
@@ -44,13 +46,10 @@ protected:
 	bool m_replacing;
 	std::unique_ptr< State > m_next;
 
-	// // Mouse variables
-	// sf::Vector2i mousePosScreen;
-	// sf::Vector2i mousePosWindow;
-	// sf::Vector2f mousePosView;
-
-	// // Resource variables
-	// std::map< std::string, sf::Texture > textures;
+	// Mouse variables
+	sf::Vector2i mousePosScreen;
+	sf::Vector2i mousePosWindow;
+	sf::Vector2f mousePosView;
 };
 
 #endif

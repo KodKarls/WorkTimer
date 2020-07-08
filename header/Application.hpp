@@ -26,7 +26,7 @@ private:
 	StateMachine 		m_machine;
 
 	// Window variables
-	sf::RenderWindow	m_window;
+	sf::RenderWindow 	m_window;
 };
 
 #endif
