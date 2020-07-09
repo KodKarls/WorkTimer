@@ -1,40 +1,47 @@
-// #ifndef INFOSTATE_HPP
-// #define INFOSTATE_HPP
+#ifndef INFOSTATE_HPP
+#define INFOSTATE_HPP
 
-// #include "Button.hpp"
+#include "Button.hpp"
+#include "State.hpp"
 
-// class InfoState : public State
-// {
-// public:
-// 	// Constructors
-// 	InfoState(sf::RenderWindow* window, std::stack< State* >* states);
+#include <SFML/Graphics/Texture.hpp>
 
-//  	// Destruktor
-// 	~InfoState();
+class StateMachine;
 
-// 	// Update functions
-// 	void update( const float& dt ) override;
-// 	void updateInput( const float& dt ) override;
-// 	void updateButtons();
+class InfoState final : public State
+{
+public:
+ 	// Constructors
+ 	InfoState(StateMachine& machine, sf::RenderWindow& window, bool replace = true);
 
-// 	// Render functions
-// 	void render( sf::RenderTarget* target = nullptr ) override;
-// 	void renderButtons( sf::RenderTarget* target = nullptr );
+  	// Destruktor
+ 	~InfoState();
 
-// private:
-// 	// Init functions
-// 	void initVariables();
-// 	void initBackground();
-// 	void initFonts();
-// 	void initButtons();
+ 	// Regular functions
+	void pause() override;
+	void resume() override;
 
-// 	// Variables
-// 	sf::Texture backgroundTexture;
-// 	sf::RectangleShape background;
-// 	sf::Font font;
+	void update() override;
+	void draw() override;
 
-// 	// Buttons
-// 	std::map< std::string, Button* > buttons;
-// };
+	// Button functions
+	void renderButtons();
+	void updateButtons();
 
-// #endif
+	// Mouse function
+	void updateMousePositions();
+
+private:
+ 	// Init functions
+ 	void initBackground();
+ 	void initButtons();
+
+ 	// Variables
+	sf::Texture 						m_backgroundTexture;
+	sf::RectangleShape 					m_background;
+
+	// Buttons
+	std::map< std::string, Button* > 	m_buttons;
+ };
+
+#endif

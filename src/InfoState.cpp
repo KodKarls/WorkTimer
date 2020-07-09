@@ -1,96 +1,124 @@
-// #include "InfoState.hpp"
+#include "StateMachine.hpp"
+#include "InfoState.hpp"
+#include "Utilities.hpp"
 
-// void InfoState::initVariables()
-// {
-//  	// Empty body
-// }
+#include <iostream>
 
-// void InfoState::initBackground()
-// {
-// 	this->background.setSize( sf::Vector2f( static_cast< float >( this->window->getSize().x ), static_cast< float >( this->window->getSize().y ) ) );
-// 	if( !this->backgroundTexture.loadFromFile( "res/images/Figaro2.png" ) )
-// 	{
-// 		// Think about error logging system
-// 		std::cout << "Error: cannot load background texture\n";
-// 		return;
-// 	}
-// 	this->background.setTexture( &this->backgroundTexture );
-// }
+#include <SFML/Window/Event.hpp>
 
-// void InfoState::initFonts()
-// {
-// 	if( !this->font.loadFromFile( "res/fonts/LifeSavers-Bold.ttf" ) )
-// 	{
-// 		// Think about error logging system
-// 		std::cout << "Error: cannot find font LifeSaversBold\n";
-// 	}
-// }
+// Init functions
+void InfoState::initBackground()
+{
+	m_background.setSize( sf::Vector2f( static_cast< float >( m_window.getSize().x ), static_cast< float >( m_window.getSize().y ) ) );
+	if( !m_backgroundTexture.loadFromFile( "res/images/Figaro2.png" ) )
+	{
+		// Think about error logging system
+		std::cout << "Error: cannot load Figaro2 texture\n";
+		return;
+	}
+	m_background.setTexture( &m_backgroundTexture );
+}
 
-// void InfoState::initButtons()
-// {
-// 	this->buttons[ "BACK_STATE" ] = new Button( 370.f, 470.f, 250.f, 50.f,
-// 		&this->font, Utitilies::setPolishSigns( "Powrót" ), 52,
-// 		sf::Color( 0, 51, 102, 230 ), sf::Color( 51, 204, 0, 230 ), sf::Color( 20, 30, 20, 50 ),
-// 		sf::Color( 100, 100, 100, 0 ), sf::Color( 150, 150, 150, 0 ), sf::Color( 20, 30, 20, 0 )
-// 	);
-// }
+void InfoState::initButtons()
+{
+	// Prepare font
+	sf::Font font;
 
-// // Constructors
-// InfoState::InfoState( sf::RenderWindow* window, std::stack< State* >* states )
-// 	: State( window, states )
-// {
-// 	this->initVariables();
-// 	this->initBackground();
-// 	this->initFonts();
-// 	this->initButtons();
-// }
+	if( !font.loadFromFile( "res/fonts/LifeSavers-Bold.ttf" ) )
+	{
+		// Think about error logging system
+		std::cout << "Error: cannot find font LifeSavers Bold\n";
+		return;
+	}
 
-// // Destructor
-// InfoState::~InfoState()
-// {
-// 	auto it = this->buttons.begin();
-// 	for( ; it != this->buttons.end(); ++it )
-// 		delete it->second;
-// }
+	// Create buttons
+	m_buttons[ "BACK_STATE" ] = new Button( 380.f, 500.f, 250.f, 50.f,
+		font, Utitilies::setPolishSigns( "Powrót" ), 52,
+		sf::Color( 51, 204, 0, 230 ), sf::Color( 0, 51, 102, 230 ), sf::Color( 20, 30, 20, 50 ),
+		sf::Color( 100, 100, 100, 0 ), sf::Color( 150, 150, 150, 0 ), sf::Color( 20, 30, 20, 0 )
+	);
+}
 
-// // Update functions
-// void InfoState::update( const float& dt )
-// {
-// 	this->updateMousePositions();
-// 	this->updateInput( dt );
-// 	this->updateButtons();
-// }
+// Constructors
+InfoState::InfoState( StateMachine& machine, sf::RenderWindow& window, bool replace )
+	: State( machine, window, replace )
+{
+	this->initBackground();
+	this->initButtons();
+}
 
-// void InfoState::updateInput( const float& dt )
-// {
-// 	// Update player input
-// }
+// Destruktor
+InfoState::~InfoState()
+{
+	for( auto it = m_buttons.begin() ; it != m_buttons.end(); ++it )
+		delete it->second;
+}
 
-// void InfoState::updateButtons()
-// {
-// 	// Update all the buttons in the state and handles their functionality
-// 	for( auto &it : this->buttons )
-// 	{
-// 		it.second->update( this->mousePosView );
-// 	}
+// Regular functions
+void InfoState::pause()
+{
+	std::cout << "InfoState Pause\n";
+}
 
-// 	// Back the menu
-// 	if( this->buttons[ "BACK_STATE" ]->isPressed() )
-// 		this->endState();
-// }
+void InfoState::resume()
+{
+	std::cout << "InfoState Resume\n";
+}
 
-// // Render functions
-// void InfoState::render( sf::RenderTarget* target )
-// {
-// 	if( !target )
-// 		target = this->window;
+void InfoState::update()
+{
+	// SFML events
+	for( auto event = sf::Event{} ; m_window.pollEvent( event ); )
+	{
+		switch( event.type )
+		{
+		case sf::Event::Closed:
+			m_machine.quit();
+			break;
 
-// 	target->draw( this->background );
-// 	this->renderButtons( target );
-// }
+		default:
+			break;
+		}
+	}
 
-// void InfoState::renderButtons( sf::RenderTarget* target )
-// {
-// 	for( auto &it : this->buttons )
-// 		it.second->render( target );
-// }
+	// Our events
+	this->updateMousePositions();
+	this->updateButtons();
+}
+
+void InfoState::draw()
+{
+	// Clear the previous drawing
+	m_window.clear();
+	m_window.draw( m_background );
+	this->renderButtons();
+	m_window.display();
+}
+
+// Button functions
+void InfoState::renderButtons()
+{
+	for( auto &it : m_buttons )
+		it.second->render( m_window );
+}
+
+void InfoState::updateButtons()
+{
+	// Update all the buttons in the state and handles their functionality
+	for( auto &it : m_buttons )
+		it.second->update( m_mousePosView );
+
+	if( m_buttons[ "BACK_STATE" ]->isPressed() )
+	{
+		sf::Mouse::setPosition( sf::Vector2i( 350, 130 ), m_window );
+		m_machine.lastState();
+	}
+}
+
+// Mouse function
+void InfoState::updateMousePositions()
+{
+	m_mousePosScreen = sf::Mouse::getPosition();
+	m_mousePosWindow = sf::Mouse::getPosition( m_window );
+	m_mousePosView = m_window.mapPixelToCoords( sf::Mouse::getPosition( m_window ) );
+}

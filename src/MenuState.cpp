@@ -1,7 +1,9 @@
 #include "StateMachine.hpp"
 #include "MenuState.hpp"
 #include "CountdownState.hpp"
+#include "InfoState.hpp"
 #include "Utilities.hpp"
+
 
 #include <iostream>
 
@@ -126,7 +128,8 @@ void MenuState::updateButtons()
 
 
 	// Info
-
+	if( m_buttons[ "INFO_STATE" ]->isPressed() )
+		m_next = StateMachine::build< InfoState >( m_machine, m_window, false );
 
 	// Quit the game
 	if( m_buttons[ "EXIT_STATE" ]->isPressed() )
