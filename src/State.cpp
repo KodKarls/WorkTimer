@@ -1,34 +1,21 @@
 #include "State.hpp"
 
 // Constructors
-State::State( sf::RenderWindow* window, std::stack< State* >* states )
-{
-	this->window = window;
-	this->states = states;
-	this->quit = false;
-}
-
-// Destructor
-State::~State()
+State::State( StateMachine& machine, sf::RenderWindow& window, const bool replace )
+	:	m_machine{ machine },
+		m_window{ window },
+		m_replacing{ replace }
 {
 	// Empty body
 }
 
-// Update functions
-void State::updateMousePositions()
-{
-	this->mousePosScreen = sf::Mouse::getPosition();
-	this->mousePosWindow = sf::Mouse::getPosition( *this->window );
-	this->mousePosView = this->window->mapPixelToCoords( sf::Mouse::getPosition( *this->window ) );
-}
-
 // Regular functions
-const bool& State::getQuit() const
+std::unique_ptr< State > State::next()
 {
-	return this->quit;
+	return std::move( m_next );
 }
 
-void State::endState()
+bool State::isReplacing() const
 {
-	this->quit = true;
+	return m_replacing;
 }

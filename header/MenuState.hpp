@@ -1,5 +1,5 @@
-#ifndef COUNTDOWN_STATE_HPP
-#define COUNTDOWN_STATE_HPP
+#ifndef MENU_STATE_HPP
+#define MENU_STATE_HPP
 
 #include "State.hpp"
 #include "Button.hpp"
@@ -8,16 +8,16 @@
 
 class StateMachine;
 
-class CountdownState final : public State
+class MenuState final : public State
 {
 public:
 	// Constructors
-	CountdownState( StateMachine& machine, sf::RenderWindow& window, bool replace = true );
+	MenuState( StateMachine& machine, sf::RenderWindow& window, bool replace = true );
 
 	// Destruktor
-	~CountdownState();
+	~MenuState();
 
- 	// Regular functions
+	// Regular functions
 	void pause() override;
 	void resume() override;
 

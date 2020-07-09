@@ -1,8 +1,10 @@
 #include "Button.hpp"
 
+#include <SFML/Window/Mouse.hpp>
+
 // Constructors
 Button::Button( float x, float y, float width, float height,
-		sf::Font* font, sf::String text, unsigned int characterSize,
+		sf::Font font, sf::String text, unsigned int characterSize,
 		sf::Color textIdleColor, sf::Color textHoverColor, sf::Color textActiveColor,
 		sf::Color idleColor, sf::Color hoverColor, sf::Color activeColor )
 {
@@ -13,13 +15,13 @@ Button::Button( float x, float y, float width, float height,
 	this->shape.setFillColor( idleColor );
 
 	this->font = font;
-	this->text.setFont( *this->font );
+	this->text.setFont( this->font );
 	this->text.setString( text );
 	this->text.setFillColor( textIdleColor );
 	this->text.setCharacterSize( characterSize );
 	this->text.setPosition(
 		this->shape.getPosition().x + this->shape.getGlobalBounds().width * 0.5f - this->text.getGlobalBounds().width * 0.5f,
-		this->shape.getPosition().y + this->shape.getGlobalBounds().height * 0.5f - this->text.getGlobalBounds().height * 0.5f
+		this->shape.getPosition().y + this->shape.getGlobalBounds().height * 0.5f - this->text.getGlobalBounds().height * 0.6f
 	);
 
 	this->textIdleColor = textIdleColor;
@@ -81,10 +83,10 @@ void Button::update( const sf::Vector2f& mousePos )
 	}
 }
 
-void Button::render( sf::RenderTarget* target )
+void Button::render( sf::RenderWindow& window )
 {
-	target->draw( this->shape );
-	target->draw( this->text );
+	window.draw( this->shape );
+	window.draw( this->text );
 }
 
 // Accessors
