@@ -1,40 +1,47 @@
-// #ifndef COUNTDOWN_STATE_HPP
-// #define COUNTDOWN_STATE_HPP
+#ifndef COUNTDOWN_STATE_HPP
+#define COUNTDOWN_STATE_HPP
 
-// #include "Button.hpp"
+#include "State.hpp"
+#include "Button.hpp"
 
-// class CountdownState : public State
-// {
-// public:
-// 	// Constructors
-// 	CountdownState( sf::RenderWindow* window, std::stack< State* >* states );
+#include <SFML/Graphics/Texture.hpp>
 
-//  	// Destruktor
-// 	~CountdownState();
+class StateMachine;
 
-// 	// Update functions
-// 	void update( const float& dt ) override;
-// 	void updateInput( const float& dt ) override;
-// 	void updateButtons();
+class CountdownState final : public State
+{
+public:
+	// Constructors
+	CountdownState( StateMachine& machine, sf::RenderWindow& window, bool replace = true );
 
-// 	// Render functions
-// 	void render( sf::RenderTarget* target = nullptr ) override;
-// 	void renderButtons( sf::RenderTarget* target = nullptr );
+	// Destruktor
+	~CountdownState();
 
-// private:
-// 	// Init functions
-// 	void initVariables();
-// 	void initBackground();
-// 	void initFonts();
-// 	void initButtons();
+ 	// Regular functions
+	void pause() override;
+	void resume() override;
 
-// 	// Variables
-// 	sf::Texture backgroundTexture;
-// 	sf::RectangleShape background;
-// 	sf::Font font;
+	void update() override;
+	void draw() override;
 
-// 	// Buttons
-// 	std::map< std::string, Button* > buttons;
-// };
+	// Button functions
+	void renderButtons();
+	void updateButtons();
 
-// #endif
+	// Mouse function
+	void updateMousePositions();
+
+private:
+	// Init functions
+	void initBackground();
+	void initButtons();
+
+	// Variables
+	sf::Texture 						m_backgroundTexture;
+	sf::RectangleShape 					m_background;
+
+	// Buttons
+	std::map< std::string, Button* > 	m_buttons;
+};
+
+#endif

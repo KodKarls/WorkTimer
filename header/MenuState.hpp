@@ -4,7 +4,6 @@
 #include "State.hpp"
 #include "Button.hpp"
 
-#include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
 class StateMachine;
@@ -14,6 +13,9 @@ class MenuState final : public State
 public:
 	// Constructors
 	MenuState( StateMachine& machine, sf::RenderWindow& window, bool replace = true );
+
+	// Destruktor
+	~MenuState();
 
 	// Regular functions
 	void pause() override;
@@ -35,11 +37,11 @@ private:
 	void initButtons();
 
 	// Variables
-	sf::Texture m_backgroundTexture;
-	sf::RectangleShape m_background;
+	sf::Texture 						m_backgroundTexture;
+	sf::RectangleShape 					m_background;
 
 	// Buttons
-	std::map< std::string, Button* > m_buttons;
+	std::map< std::string, Button* > 	m_buttons;
 };
 
 #endif

@@ -1,124 +1,153 @@
-// #include "CountdownState.hpp"
+#include "StateMachine.hpp"
+#include "CountdownState.hpp"
+#include "Utilities.hpp"
 
-// // Init functions
-// void CountdownState::initVariables()
-// {
-// 	// Empty body
-// }
+#include <iostream>
 
-// void CountdownState::initBackground()
-// {
-// 	this->background.setSize( sf::Vector2f( static_cast< float >( this->window->getSize().x ), static_cast< float >( this->window->getSize().y ) ) );
-// 	if( !this->backgroundTexture.loadFromFile( "res/images/Figaro3.png" ) )
-// 	{
-// 		// Think about error logging system
-// 		std::cout << "Error: cannot load Figaro3 texture\n";
-// 		return;
-// 	}
-// 	this->background.setTexture( &this->backgroundTexture );
-// }
+#include <SFML/Window/Event.hpp>
 
-// void CountdownState::initFonts()
-// {
-// 	if( !this->font.loadFromFile( "res/fonts/LifeSavers-Bold.ttf" ) )
-// 	{
-// 		// Think about error logging system
-// 		std::cout << "Error: cannot find font arial\n";
-// 	}
-// }
+// Init functions
+void CountdownState::initBackground()
+{
+	m_background.setSize( sf::Vector2f( static_cast< float >( m_window.getSize().x ), static_cast< float >( m_window.getSize().y ) ) );
+	if( !m_backgroundTexture.loadFromFile( "res/images/Figaro3.png" ) )
+	{
+		// Think about error logging system
+		std::cout << "Error: cannot load Figaro3 texture\n";
+		return;
+	}
+	m_background.setTexture( &m_backgroundTexture );
+}
 
-// void CountdownState::initButtons()
-// {
-// 	this->buttons[ "FIFTEEN_MINUTES" ] = new Button( 250.f, 150.f, 250.f, 50.f,
-// 		&this->font, "15 minut", 52,
-// 		sf::Color( 51, 204, 0, 230 ), sf::Color( 0, 51, 102, 230 ), sf::Color( 20, 30, 20, 50 ),
-// 		sf::Color( 70, 70, 70, 0 ), sf::Color( 150, 150, 150, 0 ), sf::Color( 20, 30, 20, 0 )
-// 	);
+void CountdownState::initButtons()
+{
+	// Prepare font
+	sf::Font font;
 
-// 	this->buttons[ "THIRTY_MINUTES" ] = new Button( 250.f, 250.f, 250.f, 50.f,
-// 		&this->font, "30 minut", 52,
-// 		sf::Color( 51, 204, 0, 230 ), sf::Color( 0, 51, 102, 230 ), sf::Color( 20, 30, 20, 50 ),
-// 		sf::Color( 70, 70, 70, 0 ), sf::Color( 150, 150, 150, 0 ), sf::Color( 20, 30, 20, 0 )
-// 	);
+	if( !font.loadFromFile( "res/fonts/LifeSavers-Bold.ttf" ) )
+	{
+		// Think about error logging system
+		std::cout << "Error: cannot find font arial\n";
+		return;
+	}
 
-// 	this->buttons[ "FORTY_FIVE_MINUTES" ] = new Button( 250.f, 350.f, 250.f, 50.f,
-// 		&this->font, "45 minut", 52,
-// 		sf::Color( 51, 204, 0, 230 ), sf::Color( 0, 51, 102, 230 ), sf::Color( 20, 30, 20, 50 ),
-// 		sf::Color( 70, 70, 70, 0 ), sf::Color( 150, 150, 150, 0 ), sf::Color( 20, 30, 20, 0 )
-// 	);
+	// Create buttons
+	m_buttons[ "FIFTEEN_MINUTES" ] = new Button( 250.f, 150.f, 250.f, 50.f,
+		font, "15 minut", 52,
+		sf::Color( 51, 204, 0, 230 ), sf::Color( 0, 51, 102, 230 ), sf::Color( 20, 30, 20, 50 ),
+		sf::Color( 70, 70, 70, 0 ), sf::Color( 150, 150, 150, 0 ), sf::Color( 20, 30, 20, 0 )
+	);
 
-// 	this->buttons[ "BACK_STATE" ] = new Button( 250.f, 500.f, 250.f, 50.f,
-// 		&this->font, Utitilies::setPolishSigns( "Powrót" ), 52,
-// 		sf::Color( 51, 204, 0, 230 ), sf::Color( 0, 51, 102, 230 ), sf::Color( 20, 30, 20, 50 ),
-// 		sf::Color( 100, 100, 100, 0 ), sf::Color( 150, 150, 150, 0 ), sf::Color( 20, 30, 20, 0 )
-// 	);
-// }
+	m_buttons[ "THIRTY_MINUTES" ] = new Button( 250.f, 250.f, 250.f, 50.f,
+		font, "30 minut", 52,
+		sf::Color( 51, 204, 0, 230 ), sf::Color( 0, 51, 102, 230 ), sf::Color( 20, 30, 20, 50 ),
+		sf::Color( 70, 70, 70, 0 ), sf::Color( 150, 150, 150, 0 ), sf::Color( 20, 30, 20, 0 )
+	);
 
-// // Constructors
-// CountdownState::CountdownState( sf::RenderWindow* window, std::stack< State* >* states )
-// 	: State( window, states )
-// {
-// 	this->initVariables();
-// 	this->initBackground();
-// 	this->initFonts();
-// 	this->initButtons();
-// }
+	m_buttons[ "FORTY_FIVE_MINUTES" ] = new Button( 250.f, 350.f, 250.f, 50.f,
+		font, "45 minut", 52,
+		sf::Color( 51, 204, 0, 230 ), sf::Color( 0, 51, 102, 230 ), sf::Color( 20, 30, 20, 50 ),
+		sf::Color( 70, 70, 70, 0 ), sf::Color( 150, 150, 150, 0 ), sf::Color( 20, 30, 20, 0 )
+	);
 
-// // Destruktor
-// CountdownState::~CountdownState()
-// {
-// 	auto it = this->buttons.begin();
-// 	for( ; it != this->buttons.end(); ++it )
-// 		delete it->second;
-// }
+	m_buttons[ "BACK_STATE" ] = new Button( 250.f, 500.f, 250.f, 50.f,
+		font, Utitilies::setPolishSigns( "Powrót" ), 52,
+		sf::Color( 51, 204, 0, 230 ), sf::Color( 0, 51, 102, 230 ), sf::Color( 20, 30, 20, 50 ),
+		sf::Color( 100, 100, 100, 0 ), sf::Color( 150, 150, 150, 0 ), sf::Color( 20, 30, 20, 0 )
+	);
+}
 
-// // Update functions
-// void CountdownState::update( const float& dt )
-// {
-// 	this->updateMousePositions();
-// 	this->updateInput( dt );
-// 	this->updateButtons();
-// }
+// Constructors
+CountdownState::CountdownState( StateMachine& machine, sf::RenderWindow& window, bool replace )
+	: State( machine, window, replace )
+{
+	this->initBackground();
+	this->initButtons();
+}
 
-// void CountdownState::updateInput( const float& dt )
-// {
-// 	// Update player input
-// }
+// Destruktor
+CountdownState::~CountdownState()
+{
+	for( auto it = m_buttons.begin() ; it != m_buttons.end(); ++it )
+		delete it->second;
+}
 
-// void CountdownState::updateButtons()
-// {
-// 	// Update all the buttons in the state and handles their functionality
-// 	for( auto &it : this->buttons )
-// 	{
-// 		it.second->update( this->mousePosView );
-// 	}
+// Regular functions
+void CountdownState::pause()
+{
+	std::cout << "CountdownState Pause\n";
+}
 
-// 	// Set fifteen minutes
+void CountdownState::resume()
+{
+	std::cout << "CountdownState Resume\n";
+}
+
+void CountdownState::update()
+{
+	// SFML events
+	for( auto event = sf::Event{} ; m_window.pollEvent( event ); )
+	{
+		switch( event.type )
+		{
+		case sf::Event::Closed:
+			m_machine.quit();
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	// Our events
+	this->updateMousePositions();
+	this->updateButtons();
+}
+
+void CountdownState::draw()
+{
+	// Clear the previous drawing
+	m_window.clear();
+	m_window.draw( m_background );
+	this->renderButtons();
+	m_window.display();
+}
+
+// Button functions
+void CountdownState::renderButtons()
+{
+	for( auto &it : m_buttons )
+		it.second->render( m_window );
+}
+
+void CountdownState::updateButtons()
+{
+	// Update all the buttons in the state and handles their functionality
+	for( auto &it : m_buttons )
+		it.second->update( m_mousePosView );
 
 
-// 	// Set thirty minutes
+	// Set 15 minut
 
 
-// 	// Set forty-five minutes
+	// Set 30 minut
 
 
-// 	// Back to the menu
-// 	if( this->buttons[ "BACK_STATE" ]->isPressed() )
-// 		this->endState();
-// }
+	// Set 45 minut
 
-// // Render functions
-// void CountdownState::render( sf::RenderTarget* target )
-// {
-// 	if( !target )
-// 		target = this->window;
 
-// 	target->draw( this->background );
-// 	this->renderButtons( target );
-// }
+	// Back to menu
+	if( m_buttons[ "BACK_STATE" ]->isPressed() )
+	{
+		sf::Mouse::setPosition( sf::Vector2i( 350, 130 ), m_window );
+		m_machine.lastState();
+	}
+}
 
-// void CountdownState::renderButtons( sf::RenderTarget* target )
-// {
-// 	for( auto &it : this->buttons )
-// 		it.second->render( target );
-// }
+// Mouse function
+void CountdownState::updateMousePositions()
+{
+	m_mousePosScreen = sf::Mouse::getPosition();
+	m_mousePosWindow = sf::Mouse::getPosition( m_window );
+	m_mousePosView = m_window.mapPixelToCoords( sf::Mouse::getPosition( m_window ) );
+}

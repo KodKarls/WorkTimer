@@ -39,17 +39,17 @@ public:
 
 protected:
 	// State variables
-	StateMachine& m_machine;
-	sf::RenderWindow& m_window;
+	StateMachine& 				m_machine;
+	sf::RenderWindow& 			m_window;
 
 	// Regular variables
 	bool m_replacing;
-	std::unique_ptr< State > m_next;
+	std::unique_ptr< State > 	m_next;
 
 	// Mouse variables
-	sf::Vector2i mousePosScreen;
-	sf::Vector2i mousePosWindow;
-	sf::Vector2f mousePosView;
+	sf::Vector2i 				m_mousePosScreen;
+	sf::Vector2i 				m_mousePosWindow;
+	sf::Vector2f 				m_mousePosView;
 };
 
 #endif
