@@ -5,7 +5,14 @@
 
 namespace Utitilies
 {
+	// Variables
+	extern int TIME;
+
+	// Functions
 	sf::String setPolishSigns( const std::string& text );
+
+	void setTime( int time );
+	const int getTime();
 }
 
 #endif

@@ -43,7 +43,7 @@ protected:
 	sf::RenderWindow& 			m_window;
 
 	// Regular variables
-	bool m_replacing;
+	bool 						m_replacing;
 	std::unique_ptr< State > 	m_next;
 
 	// Mouse variables

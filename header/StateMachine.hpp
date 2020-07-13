@@ -36,10 +36,10 @@ public:
 
 private:
 	// Stack of states
-	std::stack< std::unique_ptr< State > > m_states;
+	std::stack< std::unique_ptr< State > > 		m_states;
 
-	bool m_resume;
-	bool m_running;
+	bool 										m_resume;
+	bool 										m_running;
 };
 
 template< typename T >

@@ -41,7 +41,7 @@ void InfoState::initButtons()
 
 // Constructors
 InfoState::InfoState( StateMachine& machine, sf::RenderWindow& window, bool replace )
-	: State( machine, window, replace )
+	: State{ machine, window, replace }
 {
 	this->initBackground();
 	this->initButtons();

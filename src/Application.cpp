@@ -8,7 +8,7 @@
 void Application::initWindow()
 {
 	// Create a SFML window using basic options from a config.ini file.
-	std::ifstream configFile( "config/config.ini" );
+	std::ifstream configFile{ "config/config.ini" };
 
 	// Set default values
 	std::string title = "None";

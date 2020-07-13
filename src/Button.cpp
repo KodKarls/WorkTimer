@@ -8,29 +8,30 @@ Button::Button( float x, float y, float width, float height,
 		sf::Color textIdleColor, sf::Color textHoverColor, sf::Color textActiveColor,
 		sf::Color idleColor, sf::Color hoverColor, sf::Color activeColor )
 {
-	this->buttonState = ButtonState::BUTTON_IDLE;
+	m_buttonState = ButtonState::BUTTON_IDLE;
+	m_clickStatus = false;
 
-	this->shape.setPosition( sf::Vector2f( x, y ) );
-	this->shape.setSize( sf::Vector2f( width, height ) );
-	this->shape.setFillColor( idleColor );
+	m_shape.setPosition( sf::Vector2f( x, y ) );
+	m_shape.setSize( sf::Vector2f( width, height ) );
+	m_shape.setFillColor( idleColor );
 
-	this->font = font;
-	this->text.setFont( this->font );
-	this->text.setString( text );
-	this->text.setFillColor( textIdleColor );
-	this->text.setCharacterSize( characterSize );
-	this->text.setPosition(
-		this->shape.getPosition().x + this->shape.getGlobalBounds().width * 0.5f - this->text.getGlobalBounds().width * 0.5f,
-		this->shape.getPosition().y + this->shape.getGlobalBounds().height * 0.5f - this->text.getGlobalBounds().height * 0.6f
+	m_font = font;
+	m_text.setFont( m_font );
+	m_text.setString( text );
+	m_text.setFillColor( textIdleColor );
+	m_text.setCharacterSize( characterSize );
+	m_text.setPosition(
+		m_shape.getPosition().x + m_shape.getGlobalBounds().width * 0.5f - m_text.getGlobalBounds().width * 0.5f,
+		m_shape.getPosition().y + m_shape.getGlobalBounds().height * 0.5f - m_text.getGlobalBounds().height * 0.6f
 	);
 
-	this->textIdleColor = textIdleColor;
-	this->textHoverColor = textHoverColor;
-	this->textActiveColor = textActiveColor;
+	m_textIdleColor = textIdleColor;
+	m_textHoverColor = textHoverColor;
+	m_textActiveColor = textActiveColor;
 
-	this->idleColor = idleColor;
-	this->hoverColor = hoverColor;
-	this->activeColor = activeColor;
+	m_idleColor = idleColor;
+	m_hoverColor = hoverColor;
+	m_activeColor = activeColor;
 }
 
 // Destructor
@@ -45,55 +46,85 @@ void Button::update( const sf::Vector2f& mousePos )
 	// Update the booleans for hover and pressed
 
 	// Idle
-	this->buttonState = ButtonState::BUTTON_IDLE;
+	m_buttonState = ButtonState::BUTTON_IDLE;
 
 	// Hover
-	if( this->shape.getGlobalBounds().contains( mousePos ) )
+	if( m_shape.getGlobalBounds().contains( mousePos ) )
 	{
-		this->buttonState = ButtonState::BUTTON_HOVER;
+		m_buttonState = ButtonState::BUTTON_HOVER;
 
 		// Pressed
 		if( sf::Mouse::isButtonPressed( sf::Mouse::Left ) )
 		{
-			this->buttonState = ButtonState::BUTTON_ACTIVE;
+			m_buttonState = ButtonState::BUTTON_ACTIVE;
 		}
 	}
 
-	switch( this->buttonState )
+	switch( m_buttonState )
 	{
 	case ButtonState::BUTTON_IDLE:
-		this->shape.setFillColor( this->idleColor );
-		this->text.setFillColor( this->textIdleColor );
+		m_shape.setFillColor( m_idleColor );
+		m_text.setFillColor( m_textIdleColor );
 		break;
 
 	case ButtonState::BUTTON_HOVER:
-		this->shape.setFillColor( this->hoverColor );
-		this->text.setFillColor( this->textHoverColor );
+		m_shape.setFillColor( m_hoverColor );
+		m_text.setFillColor( m_textHoverColor );
 		break;
 
 	case ButtonState::BUTTON_ACTIVE:
-		this->shape.setFillColor( this->activeColor );
-		this->text.setFillColor( this->textActiveColor );
+		m_shape.setFillColor( m_activeColor );
+		m_text.setFillColor( m_textActiveColor );
 		break;
 
 	default:
-		this->shape.setFillColor( sf::Color::Red );
-		this->text.setFillColor( sf::Color::Blue );
+		m_shape.setFillColor( sf::Color::Red );
+		m_text.setFillColor( sf::Color::Blue );
 		break;
 	}
 }
 
 void Button::render( sf::RenderWindow& window )
 {
-	window.draw( this->shape );
-	window.draw( this->text );
+	window.draw( m_shape );
+	window.draw( m_text );
 }
 
 // Accessors
 const bool Button::isPressed() const
 {
-	if( this->buttonState == ButtonState::BUTTON_ACTIVE )
+	if( m_buttonState == ButtonState::BUTTON_ACTIVE )
 		return true;
 
 	return false;
+}
+
+const bool Button::isClick() const
+{
+	return m_clickStatus;
+}
+
+const std::string Button::getText() const
+{
+	return m_text.getString();
+}
+
+// Setters
+void Button::changeClickStatus()
+{
+	m_clickStatus = !m_clickStatus;
+}
+
+void Button::setPosition( float x, float y )
+{
+	m_shape.setPosition( sf::Vector2f( x, y ) );
+	m_text.setPosition(
+		m_shape.getPosition().x + m_shape.getGlobalBounds().width * 0.5f - m_text.getGlobalBounds().width * 0.5f,
+		m_shape.getPosition().y + m_shape.getGlobalBounds().height * 0.5f - m_text.getGlobalBounds().height * 0.6f
+	);
+}
+
+void Button::setText( sf::String text )
+{
+	m_text.setString( text );
 }

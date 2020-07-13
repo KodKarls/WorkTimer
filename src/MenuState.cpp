@@ -4,7 +4,6 @@
 #include "InfoState.hpp"
 #include "Utilities.hpp"
 
-
 #include <iostream>
 
 #include <SFML/Window/Event.hpp>
@@ -124,12 +123,17 @@ void MenuState::updateButtons()
 
 	// Set countdown
 	if( m_buttons[ "COUNTDOWN_STATE" ]->isPressed() )
+	{
 		m_next = StateMachine::build< CountdownState >( m_machine, m_window, false );
-
+		sf::Mouse::setPosition( sf::Vector2i( 380, 110 ), m_window );
+	}
 
 	// Info
 	if( m_buttons[ "INFO_STATE" ]->isPressed() )
+	{
 		m_next = StateMachine::build< InfoState >( m_machine, m_window, false );
+		sf::Mouse::setPosition( sf::Vector2i( 380, 400 ), m_window );
+	}
 
 	// Quit the game
 	if( m_buttons[ "EXIT_STATE" ]->isPressed() )

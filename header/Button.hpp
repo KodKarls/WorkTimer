@@ -18,9 +18,9 @@ class Button
 public:
 	// Constructors
 	Button( float x, float y, float width, float height,
-		sf::Font font, sf::String text, unsigned int characterSize,
-		sf::Color textIdleColor, sf::Color textHoverColor, sf::Color textActiveColor,
-		sf::Color idleColor, sf::Color hoverColor, sf::Color activeColor );
+			sf::Font font, sf::String text, unsigned int characterSize,
+			sf::Color textIdleColor, sf::Color textHoverColor, sf::Color textActiveColor,
+			sf::Color idleColor, sf::Color hoverColor, sf::Color activeColor );
 
 	// Destructor
 	~Button();
@@ -31,25 +31,34 @@ public:
 
 	// Accessors
 	const bool isPressed() const;
+	const bool isClick() const;
+	const std::string getText() const;
+
+	// Setters
+	void changeClickStatus();
+	void setPosition( float x, float y );
+	void setText( sf::String text );
 
 private:
 	// Variables
-	sf::RectangleShape 	shape;
-	sf::Font 			font;
-	sf::Text 			text;
+	sf::RectangleShape 	m_shape;
+	sf::Font 			m_font;
+	sf::Text 			m_text;
 
 	// Text colors
-	sf::Color 			textIdleColor;
-	sf::Color 			textHoverColor;
-	sf::Color 			textActiveColor;
+	sf::Color 			m_textIdleColor;
+	sf::Color 			m_textHoverColor;
+	sf::Color 			m_textActiveColor;
 
 	// Button colors
-	sf::Color 			idleColor;
-	sf::Color 			hoverColor;
-	sf::Color 			activeColor;
+	sf::Color 			m_idleColor;
+	sf::Color 			m_hoverColor;
+	sf::Color 			m_activeColor;
 
 	// Button state
-	ButtonState 		buttonState;
+	ButtonState 		m_buttonState;
+
+	bool				m_clickStatus;
 };
 
 #endif

@@ -1,5 +1,6 @@
 #include "StateMachine.hpp"
 #include "CountdownState.hpp"
+#include "ClockState.hpp"
 #include "Utilities.hpp"
 
 #include <iostream>
@@ -128,19 +129,34 @@ void CountdownState::updateButtons()
 
 
 	// Set 15 minut
-
+	if( m_buttons[ "FIFTEEN_MINUTES"]->isPressed() )
+	{
+		Utitilies::setTime( std::stoi( m_buttons[ "FIFTEEN_MINUTES"]->getText() ) );
+		m_next = StateMachine::build< ClockState >( m_machine, m_window, false );
+		sf::Mouse::setPosition( sf::Vector2i( 390, 280 ), m_window );
+	}
 
 	// Set 30 minut
-
+	if( m_buttons[ "THIRTY_MINUTES" ]->isPressed() )
+	{
+		Utitilies::setTime( std::stoi( m_buttons[ "THIRTY_MINUTES" ]->getText() ) );
+		m_next = StateMachine::build< ClockState >( m_machine, m_window, false );
+		sf::Mouse::setPosition( sf::Vector2i( 390, 280 ), m_window );
+	}
 
 	// Set 45 minut
-
+	if( m_buttons[ "FORTY_FIVE_MINUTES" ]->isPressed() )
+	{
+		Utitilies::setTime( std::stoi( m_buttons[ "FORTY_FIVE_MINUTES" ]->getText() ) );
+		m_next = StateMachine::build< ClockState >( m_machine, m_window, false );
+		sf::Mouse::setPosition( sf::Vector2i( 390, 280 ), m_window );
+	}
 
 	// Back to menu
 	if( m_buttons[ "BACK_STATE" ]->isPressed() )
 	{
-		sf::Mouse::setPosition( sf::Vector2i( 350, 130 ), m_window );
 		m_machine.lastState();
+		sf::Mouse::setPosition( sf::Vector2i( 350, 130 ), m_window );
 	}
 }
 
