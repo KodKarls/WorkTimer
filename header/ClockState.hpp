@@ -30,6 +30,7 @@ private:
 	void initBackground();
 	void initTexture();
 	void initAnimation();
+	void initFonts();
 	void initTexts();
 	void initButtons();
 
@@ -55,12 +56,20 @@ private:
 	void changeCountdownStatus();
 	const bool& getCountdownStatus();
 
-	// Animation functions
 	void renderSprite();
-	void countTime();
+
+	// Counting time functions
+	void countTimeDown();
+	void countMinutesDown();
+	void countSecondsDown();
+
+	void resetClock();
 	void resetTime();
 	void stopAudio();
-	void resetClock();
+
+	// Text functions
+	void hideCountdownFinalText();
+	void showCountdownFinalText();
 
  	// Background
 	sf::RectangleShape 						m_background;
@@ -88,8 +97,8 @@ private:
 	sf::Font								m_colonFont;
 	sf::Text								m_colon;
 
-	sf::Font								m_endCountdownFont;
-	sf::Text								m_endCountdownText;
+	sf::Font								m_countdownFinalFont;
+	sf::Text								m_countdownFinalText;
 
 	sf::Clock								m_endAnimationClock;
 

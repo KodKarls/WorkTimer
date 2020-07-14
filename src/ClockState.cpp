@@ -100,8 +100,9 @@ void ClockState::initAnimation()
 	}
 }
 
-void ClockState::initTexts()
+void ClockState::initFonts()
 {
+	// Colon font
 	if( !m_colonFont.loadFromFile( "res/fonts/DS-DIGIT.ttf" ) )
 	{
 		// Think about error logging system
@@ -109,6 +110,17 @@ void ClockState::initTexts()
 		return;
 	}
 
+	// End countdown font
+	if( !m_countdownFinalFont.loadFromFile( "res/fonts/LifeSavers-Bold.ttf" ) )
+	{
+		// Think about error logging system
+		std::cout << "Error: cannot find font LifeSavers Bold\n";
+		return;
+	}
+}
+
+void ClockState::initTexts()
+{
 	// Colon text
 	m_colon.setFont( m_colonFont );
 	m_colon.setString( ":" );
@@ -116,19 +128,12 @@ void ClockState::initTexts()
 	m_colon.setCharacterSize( 64 );
 	m_colon.setPosition( sf::Vector2f( 390.f, 165.f ) );
 
-	// End countdown text
-	if( !m_endCountdownFont.loadFromFile( "res/fonts/LifeSavers-Bold.ttf" ) )
-	{
-		// Think about error logging system
-		std::cout << "Error: cannot find font LifeSavers Bold\n";
-		return;
-	}
-
-	m_endCountdownText.setFont( m_endCountdownFont );
-	m_endCountdownText.setString( "" );
-	m_endCountdownText.setFillColor( sf::Color( 204, 0, 0, 230 ) );
-	m_endCountdownText.setCharacterSize( 52 );
-	m_endCountdownText.setPosition( sf::Vector2f( 200.f, 350.f ) );
+	// Countdown text
+	m_countdownFinalText.setFont( m_countdownFinalFont );
+	m_countdownFinalText.setString( "" );
+	m_countdownFinalText.setFillColor( sf::Color( 204, 0, 0, 230 ) );
+	m_countdownFinalText.setCharacterSize( 52 );
+	m_countdownFinalText.setPosition( sf::Vector2f( 200.f, 350.f ) );
 }
 
 void ClockState::initButtons()
@@ -165,6 +170,7 @@ ClockState::ClockState( StateMachine& machine, sf::RenderWindow& window, bool re
 	this->initBackground();
 	this->initTexture();
 	this->initAnimation();
+	this->initFonts();
 	this->initTexts();
 	this->initButtons();
 }
@@ -266,6 +272,12 @@ const bool& ClockState::getCountdownStatus()
 	return m_countDownActive;
 }
 
+void ClockState::renderSprite()
+{
+	for( auto &it : m_pCountdownAnimation )
+		it.second->render( m_window );
+}
+
 // Regular functions ( public )
 void ClockState::pause()
 {
@@ -296,7 +308,7 @@ void ClockState::update()
 	// Our events
 	this->updateMousePositions();
 	this->updateButtons();
-	this->countTime();
+	this->countTimeDown();
 }
 
 void ClockState::draw()
@@ -305,20 +317,26 @@ void ClockState::draw()
 	m_window.clear();
 	m_window.draw( m_background );
 	m_window.draw( m_colon );
-	m_window.draw( m_endCountdownText );
+	m_window.draw( m_countdownFinalText );
 	this->renderButtons();
 	this->renderSprite();
 	m_window.display();
 }
 
-// Animation functions
-void ClockState::renderSprite()
+void ClockState::hideCountdownFinalText()
 {
-	for( auto &it : m_pCountdownAnimation )
-		it.second->render( m_window );
+	m_countdownFinalText.setString( "" );
+	m_countdownFinalText.setPosition( sf::Vector2f( 0.f, 0.f ) );
 }
 
-void ClockState::countTime()
+void ClockState::showCountdownFinalText()
+{
+	m_countdownFinalText.setString( "Koniec odliczania" );
+	m_countdownFinalText.setPosition( sf::Vector2f( 200.f, 350.f ) );
+}
+
+// Counting time functions
+void ClockState::countTimeDown()
 {
 	if( this->getCountdownStatus() )
 	{
@@ -329,35 +347,16 @@ void ClockState::countTime()
 				--m_minuts;
 				m_seconds = 59;
 
-				this->setDigitOfMinut( m_minuts / 10 );
-				m_pCountdownAnimation[ "FIRST_MINUT_DIGIT" ]->setFrame( this->getDigitOfMinut() );
-				m_pCountdownAnimation[ "FIRST_MINUT_DIGIT" ]->play();
+				this->countMinutesDown();
 
-				this->setDigitOfMinut( m_minuts % 10 );
-				m_pCountdownAnimation[ "SECOND_MINUT_DIGIT" ]->setFrame( this->getDigitOfMinut() );
-				m_pCountdownAnimation[ "SECOND_MINUT_DIGIT" ]->play();
-
-				m_pCountdownAnimation[ "FIRST_SEC_DIGIT" ]->setFrame( 5 );
-				m_pCountdownAnimation[ "FIRST_SEC_DIGIT" ]->play();
-
-				m_pCountdownAnimation[ "SECOND_SEC_DIGIT" ]->setFrame( 9 );
-				m_pCountdownAnimation[ "SECOND_SEC_DIGIT" ]->play();
 				m_clock.restart();
 			}
 			else if( this->getSeconds() != 0 )
 			{
 				--m_seconds;
 
-				m_pCountdownAnimation[ "FIRST_MINUT_DIGIT" ]->play();
-				m_pCountdownAnimation[ "SECOND_MINUT_DIGIT" ]->play();
+				this->countSecondsDown();
 
-				this->setDigitOfSecond( m_seconds / 10 );
-				m_pCountdownAnimation[ "FIRST_SEC_DIGIT" ]->setFrame( this->getDigitOfSecond() );
-				m_pCountdownAnimation[ "FIRST_SEC_DIGIT" ]->play();
-
-				this->setDigitOfSecond( m_seconds % 10 );
-				m_pCountdownAnimation[ "SECOND_SEC_DIGIT" ]->setFrame( this->getDigitOfSecond() );
-				m_pCountdownAnimation[ "SECOND_SEC_DIGIT" ]->play();
 				m_clock.restart();
 			}
 			else if( this->getMinuts() == 0 && this->getSeconds() == 0 )
@@ -365,31 +364,34 @@ void ClockState::countTime()
 				if( m_clock.getElapsedTime().asSeconds() > 14.0f)
 				{
 					m_clock.restart();
+
 					this->changeCountdownStatus();
+
 					m_buttons[ "START_COUNTING_DOWN" ]->changeClickStatus();
-					m_endCountdownText.setString( "" );
-					m_endCountdownText.setPosition( sf::Vector2f( 0.f, 0.f ) );
 					m_buttons[ "START_COUNTING_DOWN" ]->setText( "Zacznij odliczanie" );
 					m_buttons[ "START_COUNTING_DOWN" ]->setPosition( 200.f, 350.f );
+
+					this->hideCountdownFinalText();
+
 					this->resetClock();
 				}
 				else
 				{
+					m_buttons[ "START_COUNTING_DOWN" ]->setPosition( 200.f, 650.f );
+
 					if( m_clockSound.getSoundStatus() == sf::SoundSource::Stopped )
 					{
 						m_clockSound.play();
 						m_clockSound.changeSoundStatus( sf::SoundSource::Playing );
 					}
-					m_buttons[ "START_COUNTING_DOWN" ]->setPosition( 200.f, 650.f );
+
 					if( m_endAnimationClock.getElapsedTime().asSeconds() > 1.0f && m_endAnimationClock.getElapsedTime().asSeconds() < 2.0f  )
 					{
-						m_endCountdownText.setString( "Koniec odliczania" );
-						m_endCountdownText.setPosition( sf::Vector2f( 200.f, 350.f ) );
+						this->showCountdownFinalText();
 					}
 					else if( m_endAnimationClock.getElapsedTime().asSeconds() >= 2.0f )
 					{
-						m_endCountdownText.setString( "" );
-						m_endCountdownText.setPosition( sf::Vector2f( 0.f, 0.f ) );
+						this->hideCountdownFinalText();
 						m_endAnimationClock.restart();
 					}
 				}
@@ -398,18 +400,31 @@ void ClockState::countTime()
 	}
 }
 
-void ClockState::resetTime()
+void ClockState::countMinutesDown()
 {
-	m_minuts = Utitilies::getTime();
-	m_seconds = 0;
-	m_minuteDigit = 0;
-	m_secondDigit = 0;
+	this->setDigitOfMinut( m_minuts / 10 );
+	m_pCountdownAnimation[ "FIRST_MINUT_DIGIT" ]->setFrame( this->getDigitOfMinut() );
+
+	this->setDigitOfMinut( m_minuts % 10 );
+	m_pCountdownAnimation[ "SECOND_MINUT_DIGIT" ]->setFrame( this->getDigitOfMinut() );
+
+	m_pCountdownAnimation[ "FIRST_SEC_DIGIT" ]->setFrame( 5 );
+	m_pCountdownAnimation[ "SECOND_SEC_DIGIT" ]->setFrame( 9 );
+
+	for( auto &it : m_pCountdownAnimation )
+		it.second->play();
 }
 
-void ClockState::stopAudio()
+void ClockState::countSecondsDown()
 {
-	m_clockSound.stop();
-	m_clockSound.changeSoundStatus( sf::SoundSource::Stopped );
+	this->setDigitOfSecond( m_seconds / 10 );
+	m_pCountdownAnimation[ "FIRST_SEC_DIGIT" ]->setFrame( this->getDigitOfSecond() );
+
+	this->setDigitOfSecond( m_seconds % 10 );
+	m_pCountdownAnimation[ "SECOND_SEC_DIGIT" ]->setFrame( this->getDigitOfSecond() );
+
+	for( auto &it : m_pCountdownAnimation )
+		it.second->play();
 }
 
 void ClockState::resetClock()
@@ -444,4 +459,18 @@ void ClockState::resetClock()
 	}
 	this->resetTime();
 	this->stopAudio();
+}
+
+void ClockState::resetTime()
+{
+	m_minuts = Utitilies::getTime();
+	m_seconds = 0;
+	m_minuteDigit = 0;
+	m_secondDigit = 0;
+}
+
+void ClockState::stopAudio()
+{
+	m_clockSound.stop();
+	m_clockSound.changeSoundStatus( sf::SoundSource::Stopped );
 }
