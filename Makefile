@@ -63,19 +63,17 @@ RELCXXFLAGS = -O3 -DNDEBUG
 # Linker flags
 #####
 LDFLAGS = -L$(LIBDIR)/lib -lopengl32 -lflac -lvorbisenc -lvorbisfile -lvorbis -logg \
-	-lwinmm -lgdi32 -lfreetype -lopenal32 -lws2_32
+	-lwinmm -lgdi32 -lfreetype -lopenal32
 
 #####
 # Linker debug flags
 #####
-DBGLDFLAGS = -lsfml-graphics-s-d -lsfml-window-s-d -lsfml-audio-s-d -lsfml-system-s-d \
-	-lsfml-network-s-d
+DBGLDFLAGS = -lsfml-graphics-s-d -lsfml-window-s-d -lsfml-audio-s-d -lsfml-system-s-d
 
 ######
 # Linker release flags
 #####
-RELLDFLAGS = -lsfml-graphics-s -lsfml-window-s -lsfml-audio-s -lsfml-system-s -mwindows \
-	-lsfml-network-s
+RELLDFLAGS = -lsfml-graphics-s -lsfml-window-s -lsfml-audio-s -lsfml-system-s -mwindows
 
 .PHONY:	all debug release prepDebug prepRelease clean deepClean rebuild
 
