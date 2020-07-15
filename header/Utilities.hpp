@@ -8,6 +8,8 @@ namespace Utitilies
 	// Variables
 	extern int TIME;
 
+	const sf::String APP_NAME = "Czasomierz";
+
 	// Functions
 	sf::String setPolishSigns( const std::string& text );
 

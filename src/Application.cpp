@@ -1,5 +1,5 @@
 #include "Application.hpp"
-#include "MenuState.hpp"
+#include "SplashState.hpp"
 
 #include <iostream>
 #include <fstream>
@@ -39,7 +39,7 @@ void Application::initWindow()
 
 void Application::initEngine()
 {
-	m_machine.run( StateMachine::build< MenuState >( m_machine, m_window, true ) );
+	m_machine.run( StateMachine::build< SplashState >( m_machine, m_window, true ) );
 }
 
 // Constructors
