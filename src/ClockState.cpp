@@ -73,24 +73,24 @@ void ClockState::initAnimation()
 	switch( Utitilies::getTime() )
 	{
 	case 15:
-		m_pCountdownAnimation[ "FIRST_MINUT_DIGIT" ] = new Animation{ m_texture, 1, 0, 64, 128, 254.f, 150.f };
-		m_pCountdownAnimation[ "SECOND_MINUT_DIGIT" ] = new Animation{ m_texture, 5, 0, 64, 128, 317.f, 150.f };
-		m_pCountdownAnimation[ "FIRST_SEC_DIGIT" ] = new Animation{ m_texture, 0, 0, 64, 128, 413.f, 150.f };
-		m_pCountdownAnimation[ "SECOND_SEC_DIGIT" ] = new Animation{ m_texture, 0, 0, 64, 128, 477.f, 150.f };
+		m_animations[ "FIRST_MINUT_DIGIT" ] = new Animation{ m_texture, 1, 0, 64, 128, 254.f, 150.f };
+		m_animations[ "SECOND_MINUT_DIGIT" ] = new Animation{ m_texture, 5, 0, 64, 128, 317.f, 150.f };
+		m_animations[ "FIRST_SEC_DIGIT" ] = new Animation{ m_texture, 0, 0, 64, 128, 413.f, 150.f };
+		m_animations[ "SECOND_SEC_DIGIT" ] = new Animation{ m_texture, 0, 0, 64, 128, 477.f, 150.f };
 		break;
 
 	case 30:
-		m_pCountdownAnimation[ "FIRST_MINUT_DIGIT" ] = new Animation{ m_texture, 3, 0, 64, 128, 254.f, 150.f };
-		m_pCountdownAnimation[ "SECOND_MINUT_DIGIT" ] = new Animation{ m_texture, 0, 0, 64, 128, 317.f, 150.f };
-		m_pCountdownAnimation[ "FIRST_SEC_DIGIT" ] = new Animation{ m_texture, 0, 0, 64, 128, 413.f, 150.f };
-		m_pCountdownAnimation[ "SECOND_SEC_DIGIT" ] = new Animation{ m_texture, 0, 0, 64, 128, 477.f, 150.f };
+		m_animations[ "FIRST_MINUT_DIGIT" ] = new Animation{ m_texture, 3, 0, 64, 128, 254.f, 150.f };
+		m_animations[ "SECOND_MINUT_DIGIT" ] = new Animation{ m_texture, 0, 0, 64, 128, 317.f, 150.f };
+		m_animations[ "FIRST_SEC_DIGIT" ] = new Animation{ m_texture, 0, 0, 64, 128, 413.f, 150.f };
+		m_animations[ "SECOND_SEC_DIGIT" ] = new Animation{ m_texture, 0, 0, 64, 128, 477.f, 150.f };
 		break;
 
 	case 45:
-		m_pCountdownAnimation[ "FIRST_MINUT_DIGIT" ] = new Animation{ m_texture, 4, 0, 64, 128, 254.f, 150.f };
-		m_pCountdownAnimation[ "SECOND_MINUT_DIGIT" ] = new Animation{ m_texture, 5, 0, 64, 128, 317.f, 150.f };
-		m_pCountdownAnimation[ "FIRST_SEC_DIGIT" ] = new Animation{ m_texture, 0, 0, 64, 128, 413.f, 150.f };
-		m_pCountdownAnimation[ "SECOND_SEC_DIGIT" ] = new Animation{ m_texture, 0, 0, 64, 128, 477.f, 150.f };
+		m_animations[ "FIRST_MINUT_DIGIT" ] = new Animation{ m_texture, 4, 0, 64, 128, 254.f, 150.f };
+		m_animations[ "SECOND_MINUT_DIGIT" ] = new Animation{ m_texture, 5, 0, 64, 128, 317.f, 150.f };
+		m_animations[ "FIRST_SEC_DIGIT" ] = new Animation{ m_texture, 0, 0, 64, 128, 413.f, 150.f };
+		m_animations[ "SECOND_SEC_DIGIT" ] = new Animation{ m_texture, 0, 0, 64, 128, 477.f, 150.f };
 		break;
 
 	default:
@@ -178,7 +178,10 @@ ClockState::ClockState( StateMachine& machine, sf::RenderWindow& window, bool re
 // Destruktor
 ClockState::~ClockState()
 {
-	for( auto it = m_buttons.begin() ; it != m_buttons.end() ; ++ it )
+	for( auto it = m_buttons.begin() ; it != m_buttons.end() ; ++it )
+		delete it->second;
+
+	for( auto it = m_animations.begin() ; it != m_animations.end() ; ++it )
 		delete it->second;
 }
 
@@ -274,7 +277,7 @@ const bool& ClockState::getCountdownStatus()
 
 void ClockState::renderSprite()
 {
-	for( auto &it : m_pCountdownAnimation )
+	for( auto &it : m_animations )
 		it.second->render( m_window );
 }
 
@@ -403,27 +406,27 @@ void ClockState::countTimeDown()
 void ClockState::countMinutesDown()
 {
 	this->setDigitOfMinut( m_minuts / 10 );
-	m_pCountdownAnimation[ "FIRST_MINUT_DIGIT" ]->setFrame( this->getDigitOfMinut() );
+	m_animations[ "FIRST_MINUT_DIGIT" ]->setFrame( this->getDigitOfMinut() );
 
 	this->setDigitOfMinut( m_minuts % 10 );
-	m_pCountdownAnimation[ "SECOND_MINUT_DIGIT" ]->setFrame( this->getDigitOfMinut() );
+	m_animations[ "SECOND_MINUT_DIGIT" ]->setFrame( this->getDigitOfMinut() );
 
-	m_pCountdownAnimation[ "FIRST_SEC_DIGIT" ]->setFrame( 5 );
-	m_pCountdownAnimation[ "SECOND_SEC_DIGIT" ]->setFrame( 9 );
+	m_animations[ "FIRST_SEC_DIGIT" ]->setFrame( 5 );
+	m_animations[ "SECOND_SEC_DIGIT" ]->setFrame( 9 );
 
-	for( auto &it : m_pCountdownAnimation )
+	for( auto &it : m_animations )
 		it.second->play();
 }
 
 void ClockState::countSecondsDown()
 {
 	this->setDigitOfSecond( m_seconds / 10 );
-	m_pCountdownAnimation[ "FIRST_SEC_DIGIT" ]->setFrame( this->getDigitOfSecond() );
+	m_animations[ "FIRST_SEC_DIGIT" ]->setFrame( this->getDigitOfSecond() );
 
 	this->setDigitOfSecond( m_seconds % 10 );
-	m_pCountdownAnimation[ "SECOND_SEC_DIGIT" ]->setFrame( this->getDigitOfSecond() );
+	m_animations[ "SECOND_SEC_DIGIT" ]->setFrame( this->getDigitOfSecond() );
 
-	for( auto &it : m_pCountdownAnimation )
+	for( auto &it : m_animations )
 		it.second->play();
 }
 
@@ -432,24 +435,24 @@ void ClockState::resetClock()
 	switch( Utitilies::getTime() )
 	{
 	case 15:
-		m_pCountdownAnimation[ "FIRST_MINUT_DIGIT" ]->reset();
-		m_pCountdownAnimation[ "SECOND_MINUT_DIGIT" ]->reset();
-		m_pCountdownAnimation[ "FIRST_SEC_DIGIT" ]->reset();
-		m_pCountdownAnimation[ "SECOND_SEC_DIGIT" ]->reset();
+		m_animations[ "FIRST_MINUT_DIGIT" ]->reset();
+		m_animations[ "SECOND_MINUT_DIGIT" ]->reset();
+		m_animations[ "FIRST_SEC_DIGIT" ]->reset();
+		m_animations[ "SECOND_SEC_DIGIT" ]->reset();
 		break;
 
 	case 30:
-		m_pCountdownAnimation[ "FIRST_MINUT_DIGIT" ]->reset();
-		m_pCountdownAnimation[ "SECOND_MINUT_DIGIT" ]->reset();
-		m_pCountdownAnimation[ "FIRST_SEC_DIGIT" ]->reset();
-		m_pCountdownAnimation[ "SECOND_SEC_DIGIT" ]->reset();
+		m_animations[ "FIRST_MINUT_DIGIT" ]->reset();
+		m_animations[ "SECOND_MINUT_DIGIT" ]->reset();
+		m_animations[ "FIRST_SEC_DIGIT" ]->reset();
+		m_animations[ "SECOND_SEC_DIGIT" ]->reset();
 		break;
 
 	case 45:
-		m_pCountdownAnimation[ "FIRST_MINUT_DIGIT" ]->reset();
-		m_pCountdownAnimation[ "SECOND_MINUT_DIGIT" ]->reset();
-		m_pCountdownAnimation[ "FIRST_SEC_DIGIT" ]->reset();
-		m_pCountdownAnimation[ "SECOND_SEC_DIGIT" ]->reset();
+		m_animations[ "FIRST_MINUT_DIGIT" ]->reset();
+		m_animations[ "SECOND_MINUT_DIGIT" ]->reset();
+		m_animations[ "FIRST_SEC_DIGIT" ]->reset();
+		m_animations[ "SECOND_SEC_DIGIT" ]->reset();
 		break;
 
 	default:

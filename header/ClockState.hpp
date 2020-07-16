@@ -79,7 +79,7 @@ private:
 	sf::Texture								m_texture;
 
 	// Animation
-	std::map< std::string, Animation* >		m_pCountdownAnimation;
+	std::map< std::string, Animation* >		m_animations;
 	sf::Clock								m_clock;
 	bool 									m_countDownActive;
 
