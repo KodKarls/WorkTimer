@@ -19,6 +19,26 @@ void InfoState::initBackground()
 	m_background.setTexture( &m_backgroundTexture );
 }
 
+void InfoState::initFont()
+{
+	if( !m_font.loadFromFile( "res/fonts/Akronim-Regular.ttf" ) )
+    {
+        // Think about error logging system
+		std::cout << "Error: cannot find font Akronim-Regular\n";
+		return;
+    }
+}
+
+void InfoState::initText()
+{
+	m_text.setFont( m_font );
+    m_text.setCharacterSize( 18 );
+    m_text.setFillColor( sf::Color::Blue );
+    m_text.setStyle( sf::Text::Bold );
+	m_text.setString("authors : Carolinii & Paulinii");
+	m_text.setPosition( sf::Vector2f( 40.f, 570.f ) );
+}
+
 void InfoState::initButtons()
 {
 	// Prepare font
@@ -43,6 +63,8 @@ void InfoState::initButtons()
 InfoState::InfoState( StateMachine& machine, sf::RenderWindow& window, bool replace )
 	: State{ machine, window, replace }
 {
+	this->initFont();
+	this->initText();
 	this->initBackground();
 	this->initButtons();
 }
@@ -91,6 +113,7 @@ void InfoState::draw()
 	// Clear the previous drawing
 	m_window.clear();
 	m_window.draw( m_background );
+	m_window.draw( m_text );
 	this->renderButtons();
 	m_window.display();
 }

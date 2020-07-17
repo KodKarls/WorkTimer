@@ -34,7 +34,7 @@ void EndState::initText()
     m_text.setCharacterSize( 72 );
     m_text.setFillColor( sf::Color::Red );
     m_text.setStyle( sf::Text::Bold );
-	m_text.setString( "Do zobaczania" );
+	m_text.setString( "Do zobaczenia" );
 	m_text.setPosition( sf::Vector2f(
 		m_window.getSize().x * 0.65 - m_text.getLocalBounds().width * 0.5,
 		m_window.getSize().y * 0.15 - m_text.getLocalBounds().height

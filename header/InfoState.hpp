@@ -33,10 +33,14 @@ public:
 
 private:
  	// Init functions
- 	void initBackground();
+ 	void initFont();
+	void initText();
+	void initBackground();
  	void initButtons();
 
  	// Variables
+	sf::Font							m_font;
+	sf::Text							m_text;
 	sf::Texture 						m_backgroundTexture;
 	sf::RectangleShape 					m_background;
 
