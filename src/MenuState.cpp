@@ -2,6 +2,7 @@
 #include "MenuState.hpp"
 #include "CountdownState.hpp"
 #include "InfoState.hpp"
+#include "EndState.hpp"
 #include "Utilities.hpp"
 
 #include <iostream>
@@ -137,7 +138,7 @@ void MenuState::updateButtons()
 
 	// Quit the game
 	if( m_buttons[ "EXIT_STATE" ]->isPressed() )
-		m_machine.quit();
+		m_next = StateMachine::build< EndState >( m_machine, m_window, true );
 }
 
 // Mouse function
