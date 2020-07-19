@@ -94,7 +94,7 @@ void SplashState::draw()
 // Animation function
 void SplashState::doAnimation()
 {
-	if( m_clock.getElapsedTime().asMilliseconds() > 300.f )
+	if( m_clock.getElapsedTime().asMilliseconds() > 230.f )
 	{
 		if( m_letterCounter < Utitilies::APP_NAME.getSize() )
 		{
@@ -103,7 +103,7 @@ void SplashState::doAnimation()
 			this->displayLetters();
 			m_clock.restart();
 		}
-		else if( m_clock.getElapsedTime().asSeconds() > 3.f )
+		else if( m_clock.getElapsedTime().asMilliseconds() > 1500.f )
 		{
 			m_next = StateMachine::build< MenuState >( m_machine, m_window, true );
 			m_clock.restart();
