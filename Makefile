@@ -3,6 +3,11 @@
 #####
 GAME = WorkTimer
 
+#####
+# Resource files
+#####
+ICON = icon
+
 ######
 # Project directory
 #####
@@ -88,7 +93,7 @@ all:	prepRelease release
 debug:	prepDebug $(DBGEXE)
 
 $(DBGEXE):	$(DBGOBJS)
-	$(CXX) -o $@ $^ $(DBGLDFLAGS) $(LDFLAGS)
+	$(CXX) -o $@ $^ $(DBGLDFLAGS) $(LDFLAGS) $(DBGOBJSDIR)/$(ICON).res
 
 $(DBGOBJSDIR)/%.o:	$(SRCDIR)/%.cpp
 	$(CXX) $(DBGCXXFLAGS) $(CXXFLAGS) -MMD -MP -MF $(DEPDIR)/$*.d -c $< -o $@
@@ -103,7 +108,7 @@ prepDebug:
 release:	prepRelease $(RELEXE)
 
 $(RELEXE):	$(RELOBJS)
-	$(CXX) -o $@ $^ $(RELLDFLAGS) $(LDFLAGS)
+	$(CXX) -o $@ $^ $(RELLDFLAGS) $(LDFLAGS) $(RELOBJSDIR)/$(ICON).res
 
 $(RELOBJSDIR)/%.o:	$(SRCDIR)/%.cpp
 	$(CXX) $(RELCXXFLAGS) $(CXXFLAGS) -MMD -MP -MF $(DEPDIR)/$*.d -c $< -o $@
