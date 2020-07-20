@@ -20,6 +20,7 @@ public:
 private:
 	// Init functions
 	void initWindow();
+	void initIcon();
 	void initEngine();
 
 	// State variables
@@ -27,6 +28,9 @@ private:
 
 	// Window variables
 	sf::RenderWindow 	m_window;
+
+	// Icon variables
+	sf::Image 			m_icon;
 };
 
 #endif

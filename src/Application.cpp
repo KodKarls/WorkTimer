@@ -37,6 +37,17 @@ void Application::initWindow()
 	m_window.setVerticalSyncEnabled( verticalSyncEnabled );
 }
 
+void Application::initIcon()
+{
+	auto m_icon = sf::Image{};
+	if (!m_icon.loadFromFile("res/images/logo.png"))
+	{
+    	// Think about error logging system
+		std::cout << "Error: cannot find logo\n";
+	}
+	m_window.setIcon(m_icon.getSize().x, m_icon.getSize().y, m_icon.getPixelsPtr());
+}
+
 void Application::initEngine()
 {
 	m_machine.run( StateMachine::build< SplashState >( m_machine, m_window, true ) );
@@ -46,6 +57,7 @@ void Application::initEngine()
 Application::Application()
 {
 	this->initWindow();
+	this->initIcon();
 	this->initEngine();
 }
 
