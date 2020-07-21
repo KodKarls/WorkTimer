@@ -9,10 +9,10 @@
 void EndState::initBackground()
 {
 	m_background.setSize( sf::Vector2f( static_cast< float >( m_window.getSize().x ), static_cast< float >( m_window.getSize().y ) ) );
-	if( !m_backgroundTexture.loadFromFile( "res/images/FigaroEnd2.png" ) )
+	if( !m_backgroundTexture.loadFromFile( "res/images/FigaroEnd.png" ) )
 	{
 		// Think about error logging system
-		std::cout << "Error: cannot load figaro end 2 texture\n";
+		std::cout << "Error: cannot load figaro end texture\n";
 		return;
 	}
 	m_background.setTexture( &m_backgroundTexture );
