@@ -131,7 +131,7 @@ void CountdownState::updateButtons()
 	// Set 15 minut
 	if( m_buttons[ "FIFTEEN_MINUTES"]->isPressed() )
 	{
-		Utitilies::setTime( std::stoi( m_buttons[ "FIFTEEN_MINUTES"]->getText() ) );
+		Utitilies::setTime( std::stoi( m_buttons[ "FIFTEEN_MINUTES" ]->getText().substr( 0, 2 ) ) );
 		m_next = StateMachine::build< ClockState >( m_machine, m_window, false );
 		sf::Mouse::setPosition( sf::Vector2i( 390, 280 ), m_window );
 	}
@@ -139,7 +139,7 @@ void CountdownState::updateButtons()
 	// Set 30 minut
 	if( m_buttons[ "THIRTY_MINUTES" ]->isPressed() )
 	{
-		Utitilies::setTime( std::stoi( m_buttons[ "THIRTY_MINUTES" ]->getText() ) );
+		Utitilies::setTime( std::stoi( m_buttons[ "THIRTY_MINUTES" ]->getText().substr( 0, 2 ) ) );
 		m_next = StateMachine::build< ClockState >( m_machine, m_window, false );
 		sf::Mouse::setPosition( sf::Vector2i( 390, 280 ), m_window );
 	}
@@ -147,7 +147,7 @@ void CountdownState::updateButtons()
 	// Set 45 minut
 	if( m_buttons[ "FORTY_FIVE_MINUTES" ]->isPressed() )
 	{
-		Utitilies::setTime( std::stoi( m_buttons[ "FORTY_FIVE_MINUTES" ]->getText() ) );
+		Utitilies::setTime( std::stoi( m_buttons[ "FORTY_FIVE_MINUTES" ]->getText().substr( 0, 2 ) ) );
 		m_next = StateMachine::build< ClockState >( m_machine, m_window, false );
 		sf::Mouse::setPosition( sf::Vector2i( 390, 280 ), m_window );
 	}
