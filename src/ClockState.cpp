@@ -1,5 +1,6 @@
 #include "StateMachine.hpp"
 #include "ClockState.hpp"
+#include "EndState.hpp"
 #include "Utilities.hpp"
 
 #include <iostream>
@@ -300,7 +301,7 @@ void ClockState::update()
 		switch( event.type )
 		{
 		case sf::Event::Closed:
-			m_machine.quit();
+			m_next = StateMachine::build< EndState >( m_machine, m_window, true );
 			break;
 
 		default:

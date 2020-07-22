@@ -1,5 +1,6 @@
 #include "StateMachine.hpp"
 #include "InfoState.hpp"
+#include "EndState.hpp"
 #include "Utilities.hpp"
 
 #include <iostream>
@@ -95,7 +96,7 @@ void InfoState::update()
 		switch( event.type )
 		{
 		case sf::Event::Closed:
-			m_machine.quit();
+			m_next = StateMachine::build< EndState >( m_machine, m_window, true );
 			break;
 
 		default:
