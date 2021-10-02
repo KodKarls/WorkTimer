@@ -13,9 +13,12 @@ ICON = icon
 #####
 IDIR = header
 SRCDIR = src
+RESDIR = res
+CONFDIR = config
 BUILDDIR = bin
 DEPDIR = $(BUILDDIR)/.deps
-LIBDIR = dependencies/SFML
+DEPENDENCIESDIR = dependencies
+LIBDIR = $(DEPENDENCIESDIR)/SFML
 
 ######
 # Debug directory
@@ -93,7 +96,7 @@ all:	prepRelease release
 debug:	prepDebug $(DBGEXE)
 
 $(DBGEXE):	$(DBGOBJS)
-	$(CXX) -o $@ $^ $(DBGLDFLAGS) $(LDFLAGS) $(DBGOBJSDIR)/$(ICON).res
+	$(CXX) -o $@ $^ $(DBGLDFLAGS) $(LDFLAGS) $(RESDIR)/$(ICON).res
 
 $(DBGOBJSDIR)/%.o:	$(SRCDIR)/%.cpp
 	$(CXX) $(DBGCXXFLAGS) $(CXXFLAGS) -MMD -MP -MF $(DEPDIR)/$*.d -c $< -o $@
@@ -101,6 +104,10 @@ $(DBGOBJSDIR)/%.o:	$(SRCDIR)/%.cpp
 prepDebug:
 	@mkdir -p $(DEPDIR)
 	@mkdir -p $(DBGOBJSDIR)
+	@cp -r $(RESDIR) $(DBGDIR)/$(RESDIR)
+	@cp -r $(CONFDIR) $(DBGDIR)/$(CONFDIR)
+	@cp icon.ico $(DBGDIR)
+	@cp -r $(DEPENDENCIESDIR)/*.dll $(DBGDIR)
 
 ######
 # Release rules
@@ -108,7 +115,7 @@ prepDebug:
 release:	prepRelease $(RELEXE)
 
 $(RELEXE):	$(RELOBJS)
-	$(CXX) -o $@ $^ $(RELLDFLAGS) $(LDFLAGS) $(RELOBJSDIR)/$(ICON).res
+	$(CXX) -o $@ $^ $(RELLDFLAGS) $(LDFLAGS) $(RESDIR)/$(ICON).res
 
 $(RELOBJSDIR)/%.o:	$(SRCDIR)/%.cpp
 	$(CXX) $(RELCXXFLAGS) $(CXXFLAGS) -MMD -MP -MF $(DEPDIR)/$*.d -c $< -o $@
@@ -116,6 +123,10 @@ $(RELOBJSDIR)/%.o:	$(SRCDIR)/%.cpp
 prepRelease:
 	@mkdir -p $(DEPDIR)
 	@mkdir -p $(RELOBJSDIR)
+	@cp -r $(RESDIR) $(RELDIR)/$(RESDIR)
+	@cp -r $(CONFDIR) $(RELDIR)/$(CONFDIR)
+	@cp icon.ico $(RELDIR)
+	@cp -r $(DEPENDENCIESDIR)/*.dll $(RELDIR)
 
 #####
 # Other rules
@@ -128,6 +139,9 @@ deepClean:
 	rm	-f	$(DBGEXE)	$(DBGOBJS)
 	rm	-f	$(RELEXE)	$(RELOBJS)
 	rm	-f	$(DEP)
+
+allClean:
+	rm -r $(BUILDDIR)
 
 rebuild:	clean all
 
